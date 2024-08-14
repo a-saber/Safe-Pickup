@@ -1,5 +1,6 @@
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_nearby_schools/get_nearby_schools_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_nearby_schools/get_nearby_schools_state.dart';
@@ -7,8 +8,10 @@ import 'package:call_son/feature/guardian/presentation/views/widgets/custom_floa
 import 'package:call_son/feature/guardian/presentation/views/widgets/school_level_card_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
+import 'parent_search_for_school_view.dart';
 import 'widgets/custom_drawer.dart';
 
 class ParentsHomeView extends StatelessWidget {
@@ -35,13 +38,43 @@ class ParentsHomeView extends StatelessWidget {
         child: Column(
           children:
           [
-            DefaultFormField(
-              controller: TextEditingController(),
-              labelText: 'Search',
-              textInputType: TextInputType.text,
-              suffixIcon: const Icon(
-                IconlyLight.search,
-                color: ColorsManager.primary,
+            InkWell(
+              onTap: ()
+              {
+                Get.to(()=> ParentSearchForSchoolView(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: DelayManager.rightToLeftWithFade);
+              },
+              child: TextFormField(
+                style: StyleManager.regular.copyWith(
+                    fontSize: 15.0,
+                    color: ColorsManager.primary
+                ),
+                enabled: false,
+                decoration: InputDecoration(
+                    labelText: 'Search',
+                    labelStyle: StyleManager.semiBold.copyWith(
+                      fontSize: 15.0,
+                    ),
+                    suffixIcon: const Padding(
+                      padding: EdgeInsetsDirectional.only(end:5.0),
+                      child: Icon(
+                        IconlyLight.search,
+                        color: ColorsManager.primary,
+                      ),
+                    ),
+                    errorStyle: StyleManager.regular.copyWith(
+                        color: ColorsManager.red),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: ColorsManager.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: ColorsManager.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    contentPadding: const EdgeInsetsDirectional.only(start: 10.0)
+                ),
               ),
             ),
             const SizedBox(

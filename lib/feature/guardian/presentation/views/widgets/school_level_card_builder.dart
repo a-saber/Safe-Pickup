@@ -18,18 +18,16 @@ class SchoolLevelCardBuilder extends StatelessWidget {
       {super.key,
         required this.school,
         required this.level,
-        required this.kid,
-        this.color});
+        required this.kid,});
 
   final SchoolModel school;
   final LevelModel level;
   final KidModel kid;
-  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color,
+      color: ColorsManager.white,
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

@@ -20,7 +20,6 @@ class ParentKidsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white.withOpacity(0.75),
       appBar: const CustomAppBar(title: 'Kids', showPopup: true),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -60,6 +59,7 @@ class KidCardBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: ColorsManager.white,
       margin:  const EdgeInsets.symmetric(vertical: 10),
       elevation: 5,
       shape: RoundedRectangleBorder(

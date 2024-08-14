@@ -20,6 +20,8 @@ abstract class GuardianRepo {
 
   Future<Either<Failure, List<SchoolModel>>> getSchools();
 
+  Future<Either<Failure, List<SchoolModel>>> searchSchools({required String schoolName});
+
   Future<Either<Failure, List<SchoolModel>>> getNearBySchools(context, {required double distanceInKm});
 
   Future<Either<Failure, void>> editKidLevel(

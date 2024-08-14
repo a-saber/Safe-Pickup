@@ -24,7 +24,6 @@ class KidDetailsView extends StatelessWidget {
     return BlocBuilder<GetKidDataCubit, GetKidDataState>(
         builder: (context, state) {
       return Scaffold(
-        backgroundColor: ColorsManager.white.withOpacity(0.75),
         appBar: CustomAppBar(
             title: 'Schools', showPopup: true,
           actions: 

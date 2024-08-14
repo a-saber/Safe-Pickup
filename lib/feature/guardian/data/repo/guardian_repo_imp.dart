@@ -106,6 +106,40 @@ class GuardianRepoImplementation extends GuardianRepo {
   }
 
   @override
+  Future<Either<Failure, List<SchoolModel>>> searchSchools({required String schoolName}) async
+  {
+    List<SchoolModel> schools=[];
+    try
+    {
+      var schoolsResponse = await FirebaseFirestore.instance
+          .collection(CollectionManager.schoolsCollection)
+          .where('name', isGreaterThanOrEqualTo: schoolName)
+          .where('name', isLessThanOrEqualTo: schoolName + '\uf8ff').get();
+      await Future.forEach(
+          schoolsResponse.docs,
+              (element) async{
+            schools.add( SchoolModel.fromJson(element.data()) );
+          });
+      if (schools.isEmpty)
+      {
+        return left(DataFailure('No Schools found'));
+      }
+      else
+      {
+        return right(schools);
+      }
+    }
+    catch (e)
+    {
+      print(e.toString());
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuthException(e));
+      }
+      return left(FirebaseFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<LevelModel>>> getLevels({required String schoolId}) async
   {
     List<LevelModel> levels=[];

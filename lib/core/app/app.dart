@@ -17,6 +17,7 @@ import 'package:call_son/feature/guardian/presentation/cubit/get_levels/get_leve
 import 'package:call_son/feature/guardian/presentation/cubit/get_nearby_schools/get_nearby_schools_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/parent_edit_kid_level/parent_edit_kid_level_cubit.dart';
+import 'package:call_son/feature/guardian/presentation/cubit/search_schools/search_schools_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/update_parent_data_cubit/update_parent_data_cubit.dart';
 import 'package:call_son/feature/guardian_history/data/repo/guardian_history_repo_imp.dart';
 import 'package:call_son/feature/guardian_history/presentation/cubit/history/history_cubit.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
       providers:
       [
         BlocProvider(create: (context)=>GetImageCubit()),
+        BlocProvider(create: (context)=>SearchSchoolsCubit(getIt.get<GuardianRepoImplementation>())),
         BlocProvider(create: (context)=>GetNearBySchoolsCubit(getIt.get<GuardianRepoImplementation>())..getNearBySchools(context, distanceInKm: 1)),
         BlocProvider(create: (context)=>GetLevelsCubit(getIt.get<GuardianRepoImplementation>())),
         BlocProvider(create: (context)=>GetAllSchoolsCubit(getIt.get<GuardianRepoImplementation>())),
