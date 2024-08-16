@@ -2,6 +2,7 @@ import 'package:call_son/feature/school/presentation/cubit/school_layout_cubit/s
 import 'package:call_son/feature/school/presentation/cubit/school_layout_cubit/school_layout_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'widgets/school_home_nav_bar.dart';
 
 
@@ -20,7 +21,7 @@ class SchoolHomeLayout extends StatelessWidget {
             appBar: cubit.currentIndex == 0 ?
             null:
             AppBar(
-              title: Text(cubit.currentTitle),
+              title: Text(cubit.currentTitle.tr),
             ),
             bottomNavigationBar: const SchoolNavBar(),
             body: Padding(

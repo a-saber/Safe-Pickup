@@ -43,6 +43,8 @@ import '../../feature/school/presentation/cubit/change_call_status/change_call_s
 import '../../feature/school/presentation/cubit/get_not_verified_guardians/get_not_verified_guardians_cubit.dart';
 import '../../feature/auth/presentation/cubit/location/location_cubit.dart';
 import '../../feature/auth/presentation/cubit/school_register/school_register_cubit.dart';
+import '../cache_helper/cache_data.dart';
+import '../localization/app_localization.dart';
 import '../service/service_locator.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -89,6 +91,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>GetSchoolsCubit(getIt.get<AuthRepoImplementation>())),
       ],
       child: GetMaterialApp(
+        locale: Locale(CacheData.lang!),
+        translations: AppLocalization(),
         title: ConstantsManager.appTitle,
         theme: ThemeManager.theme,
         debugShowCheckedModeBanner: false,

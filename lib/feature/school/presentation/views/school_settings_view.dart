@@ -1,11 +1,13 @@
+import 'package:call_son/core/cache_helper/cache_data.dart';
+import 'package:call_son/core/cache_helper/cache_helper_keys.dart';
+import 'package:call_son/core/cache_helper/cashe_helper.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/location/location_cubit.dart';
 import 'package:call_son/feature/school/presentation/cubit/get_school_levels_cubit/get_school_levels_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconly/iconly.dart';
@@ -59,7 +61,21 @@ class SchoolSettingsView extends StatelessWidget {
         SettingItemBuilder(
           icon: IconlyLight.swap,
           title: 'Language',
-          onTap: () {},
+          onTap: () async {
+            if (CacheData.lang == CacheHelperKeys.keyEN) {
+              await CacheHelper.saveData(
+                  key: CacheHelperKeys.langKey,
+                  value: CacheHelperKeys.keyAR);
+              Get.updateLocale(TranslationKeyManager.localeAR);
+              CacheData.lang = CacheHelperKeys.keyAR;
+            } else {
+              await CacheHelper.saveData(
+                  key: CacheHelperKeys.langKey,
+                  value: CacheHelperKeys.keyEN);
+              Get.updateLocale(TranslationKeyManager.localeEN);
+              CacheData.lang = CacheHelperKeys.keyEN;
+            }
+          },
         ),
         SettingItemBuilder(
           icon: IconlyLight.bag,

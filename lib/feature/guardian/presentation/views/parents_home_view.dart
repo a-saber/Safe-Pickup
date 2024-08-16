@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
@@ -24,7 +25,7 @@ class ParentsHomeView extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('Home'),
+        title:  Text(TranslationKeyManager.home.tr),
         leading: IconButton(
           onPressed: () {
             scaffoldKey.currentState!.openDrawer();

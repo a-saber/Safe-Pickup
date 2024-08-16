@@ -1,7 +1,9 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/feature/school/presentation/views/school_settings_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import 'school_layout_state.dart';
 import 'package:call_son/feature/school/presentation/views/school_calls_view.dart';
@@ -36,7 +38,7 @@ class SchoolLayoutCubit extends Cubit<SchoolLayoutState> {
         break;
       case 3:
         currentScreen = const SchoolSettingsView();
-        currentTitle = 'Settings';
+        currentTitle = TranslationKeyManager.settings;
         break;
     }
     emit(SchoolLayoutChangeNavIndex());
