@@ -63,5 +63,15 @@ Map<String, String> ar =
   TranslationKeyManager.nearBySchools  : 'المدارس القريبة',
   TranslationKeyManager.history  : 'السجل',
   TranslationKeyManager.joinRequest  : 'طلب انضمام',
+  TranslationKeyManager.pickupRequestedSuccessfully : 'تم ارسال طلب الاستدعاء بنجاح',
+  TranslationKeyManager.accountUpdatedSuccessfully : 'تم تحديث الحساب بنجاح',
+  TranslationKeyManager.editedSuccessfully : 'تم التعديل بنجاح',
+  TranslationKeyManager.editSchoolLevel : 'تعديل المستوي',
+  TranslationKeyManager.pleaseSelectNewLevel : 'الرجاء تحديد مستوي جديد',
+  TranslationKeyManager.sureUWantToDelete : 'متأكد انك تريد الحذف؟',
+  TranslationKeyManager.yesDelete : 'نعم, حذف',
+  TranslationKeyManager.newSchoolLevel : 'مستوي جديد',
+  TranslationKeyManager.add : 'اضافة',
+  TranslationKeyManager.addSuccessfully : 'تمت الاضافة بنجاح',
 
 };

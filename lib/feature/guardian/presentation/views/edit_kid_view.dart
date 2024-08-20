@@ -2,6 +2,7 @@ import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field2.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/core/models/school_model.dart';
@@ -18,6 +19,7 @@ import 'package:call_son/feature/guardian/presentation/cubit/parent_edit_kid_lev
 import 'package:call_son/feature/guardian/presentation/views/widgets/delete_kid_school_level_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 
@@ -40,7 +42,9 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: CustomAppBar(title: 'Edit School Level', showPopup: true,
+      appBar: CustomAppBar(
+        title: TranslationKeyManager.editSchoolLevel.tr,
+        showPopup: true,
       actions:
       [
         IconButton(onPressed: ()
@@ -66,7 +70,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
             children:
             [
               DefaultFormField2(
-                  hintText: 'School',
+                  hintText: TranslationKeyManager.school.tr,
                   enabled: false,
                   controller: TextEditingController(
                       text: widget.school.name
@@ -203,7 +207,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
                   });
                 },
                 child: DefaultFormField2(
-                    hintText: 'Level',
+                    hintText: TranslationKeyManager.level.tr,
                     enabled: false,
                     controller: TextEditingController(
                       text: newLevel ==null? widget.level.name: newLevel!.name
@@ -221,7 +225,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
                         context: context, text: state.failure.errorMessage);
                   } else if (state is ParentEditKidLevelSuccess) {
                     GetKidDataCubit.get(context).getKidData(kidId: widget.kid.id!);
-                    callMySnackBar(context: context, text: 'Edited Successfully');
+                    callMySnackBar(context: context, text: TranslationKeyManager.editedSuccessfully.tr);
                   }
                 },
                 builder: (context, state) {
@@ -236,7 +240,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
                         {
                           if(newLevel == null)
                           {
-                            callMySnackBar(context: context, text: 'Please select New level');
+                            callMySnackBar(context: context, text: TranslationKeyManager.pleaseSelectNewLevel.tr);
                           }
                           else {
                             ParentEditKidLevelCubit.get(context)
@@ -249,7 +253,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
                           }
                         }
                       },
-                      text: "Edit");
+                      text: TranslationKeyManager.edit.tr);
                 },
               ),
 
@@ -280,7 +284,7 @@ class _NewKidSchoolState extends State<NewKidSchool> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: const CustomAppBar(title: 'New School Level', showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.newSchoolLevel.tr, showPopup: true,),
       body: Form(
         key: formKey,
         child: Padding(
@@ -582,7 +586,7 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                         context: context, text: state.failure.errorMessage);
                   } else if (state is AddKidLevelSuccess) {
                     GetKidDataCubit.get(context).getKidData(kidId: widget.kid.id!);
-                    callMySnackBar(context: context, text: 'Added Successfully');
+                    callMySnackBar(context: context, text: TranslationKeyManager.addSuccessfully.tr);
                   }
                 },
                 builder: (context, state) {
@@ -603,7 +607,8 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                           );
                         }
                       },
-                      text: "Add");
+                      text: TranslationKeyManager.add.tr
+                  );
                 },
               ),
 

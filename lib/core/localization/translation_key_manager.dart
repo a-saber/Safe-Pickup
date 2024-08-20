@@ -80,9 +80,19 @@ class TranslationKeyManager {
 
 
   static const joinRequest = 'Join Request';
+  static const editSchoolLevel = 'Edit School Level';
+
+
   // response
 
 static const pickupRequestedSuccessfully = 'Pickup Requested Successfully';
 static const accountUpdatedSuccessfully = 'Account Updated Successfully';
 static const editedSuccessfully = 'Edited Successfully';
+static const pleaseSelectNewLevel = 'Please select New level';
+static const  sureUWantToDelete  = 'Sure you want to Delete?';
+static const  yesDelete = 'Yes, Delete';
+static const  newSchoolLevel = 'New School Level';
+static const  add = 'Add';
+static const  addSuccessfully = 'Added Successfully';
+
 }

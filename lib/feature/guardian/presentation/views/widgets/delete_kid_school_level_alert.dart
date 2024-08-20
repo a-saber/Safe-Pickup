@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/delete_kid_level/delete_kid_level_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:call_son/feature/guardian/presentation/cubit/delete_kid_level/de
 import 'package:call_son/feature/guardian/presentation/cubit/get_kid_data_cubit/get_kid_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 AlertDialog alertDeleteKidSchoolLevel(context, {   required String kidId,   required String schoolId,   required String levelId, }) => AlertDialog(
@@ -38,7 +40,7 @@ AlertDialog alertDeleteKidSchoolLevel(context, {   required String kidId,   requ
                   height: 10,
                 ),
                 Text(
-                  'Sure you want to Delete?',
+                  TranslationKeyManager.sureUWantToDelete.tr,
                   textAlign: TextAlign.center,
                   style: StyleManager.bold.copyWith(
                     fontSize: 22,
@@ -60,7 +62,8 @@ AlertDialog alertDeleteKidSchoolLevel(context, {   required String kidId,   requ
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text('No, Cancel',
+                              child: Text(
+                                  TranslationKeyManager.noCancel.tr,
                                   style: StyleManager.semiBold.copyWith(
                                     color: Colors.white,
                                     fontSize: 19,
@@ -105,7 +108,7 @@ AlertDialog alertDeleteKidSchoolLevel(context, {   required String kidId,   requ
                                   child: Padding(
                                     padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                    child: Text('Yes, Delete',
+                                    child: Text(TranslationKeyManager.yesDelete.tr,
                                         style: StyleManager.semiBold.copyWith(
                                           color: ColorsManager.primary,
                                           fontSize: 19,

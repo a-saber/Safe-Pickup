@@ -61,6 +61,16 @@ Map<String, String> en =
   TranslationKeyManager.nearBySchools  : 'Near By Schools',
   TranslationKeyManager.history  : 'History',
   TranslationKeyManager.joinRequest  : 'Join Request',
+  TranslationKeyManager.pickupRequestedSuccessfully : 'Pickup Requested Successfully',
+  TranslationKeyManager.accountUpdatedSuccessfully : 'Account Updated Successfully',
+  TranslationKeyManager.editedSuccessfully : 'Edited Successfully',
+  TranslationKeyManager.editSchoolLevel : 'Edit School Level',
+  TranslationKeyManager.pleaseSelectNewLevel : 'Please Select New Level',
+  TranslationKeyManager.sureUWantToDelete : 'Sure you want to delete?',
+  TranslationKeyManager.yesDelete : 'Yes, Delete',
+  TranslationKeyManager.newSchoolLevel : 'New School Level',
+  TranslationKeyManager.add : 'Add',
+  TranslationKeyManager.addSuccessfully : 'Add Successfully',
 
 
 };
