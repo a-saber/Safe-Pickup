@@ -2,6 +2,7 @@ import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/defualt_drop_down/default_drop_down.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/shared_functions/location.dart';
 import 'package:call_son/core/models/kid_model.dart';
@@ -10,7 +11,6 @@ import 'package:call_son/feature/guardian/presentation/cubit/get_kid_data_cubit/
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_state.dart';
 import 'package:call_son/feature/guardian/presentation/views/result_view.dart';
-import 'package:call_son/feature/guardian_history/presentation/views/history_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -37,8 +37,8 @@ class _CallViewState extends State<CallView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Call",
+      appBar: CustomAppBar(
+        title: TranslationKeyManager.pickup.tr,
         showPopup: true,
       ),
       body: BlocConsumer<GetAllParentKidsCubit, GetAllParentKidsState>(
@@ -58,7 +58,7 @@ class _CallViewState extends State<CallView> {
                       children:
                       [
                         KidsDropDown(
-                            text: 'Kid',
+                            text: TranslationKeyManager.kid.tr,
                             textEditingController: TextEditingController(text: kid != null? kid!.name: ''),
                             kids: GetAllParentKidsCubit.get(context).kids,
                             value: kid,
@@ -85,7 +85,7 @@ class _CallViewState extends State<CallView> {
                              {
                                return SchoolsDropDown(
                                    value: school,
-                                   text: 'kid school',
+                                   text: TranslationKeyManager.kidSchool.tr,
                                    textEditingController: TextEditingController(text: school != null? '${school!.name} ${school!.kidLevelModel!.name}': ''),
                                    schools: GetKidDataCubit.get(context).schools,
                                    onChanged: (SchoolModel? schoolModel)
@@ -116,7 +116,7 @@ class _CallViewState extends State<CallView> {
                           callMySnackBar(
                               context: context, text: state.error);
                         } else if (state is CallSuccess) {
-                          callMySnackBar(context: context, text: 'Call sent Successfully');
+                          callMySnackBar(context: context, text: TranslationKeyManager.pickupRequestedSuccessfully.tr);
                           Get.to(()=> ResultView(
                             callId: state.id,
                               kid: kid!,
@@ -141,7 +141,7 @@ class _CallViewState extends State<CallView> {
                               );
 
                           },
-                          text: "Call",
+                          text: TranslationKeyManager.pickup.tr,
                         );
                       },
                     ),
@@ -168,37 +168,3 @@ class _CallViewState extends State<CallView> {
   }
 }
 
-
-class DrawerBody extends StatelessWidget {
-  const DrawerBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width*0.5,
-        child: Column(
-          children:
-          [
-            TextButton(
-              onPressed: ()
-              {
-                Get.to(()=>const GuardianHistoryView());
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:
-                [
-                  Icon(Icons.history),
-                  SizedBox(width: 5,),
-                  Text('History'),
-                ],
-              )
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}

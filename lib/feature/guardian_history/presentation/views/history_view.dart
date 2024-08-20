@@ -1,9 +1,11 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/feature/guardian_history/presentation/cubit/history/history_cubit.dart';
 import 'package:call_son/feature/guardian_history/presentation/cubit/history/history_state.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/core_widgets/my_tab_bar_view.dart';
 import '../../../../core/models/call_model.dart';
@@ -22,7 +24,7 @@ class _GuardianHistoryViewState extends State<GuardianHistoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'History', showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.history.tr, showPopup: true,),
       body: SafeArea(
         child: Column(
           children:
@@ -48,13 +50,13 @@ class _GuardianHistoryViewState extends State<GuardianHistoryView> {
               tabs: [
                 TabBarItem(
                     selected: callStatus == CallStatus.waiting,
-                    label: 'Waiting'.toUpperCase()),
+                    label: TranslationKeyManager.waiting.tr.toUpperCase()),
                 TabBarItem(
                     selected: callStatus == CallStatus.accepted,
-                    label: 'Accepted'.toUpperCase()),
+                    label: TranslationKeyManager.accepted.tr.toUpperCase()),
                 TabBarItem(
                     selected: callStatus == CallStatus.rejected,
-                    label: 'Rejected'.toUpperCase()),
+                    label: TranslationKeyManager.rejected.tr.toUpperCase()),
               ],
             ),
             HistoryViewBody(callStatus: callStatus,)

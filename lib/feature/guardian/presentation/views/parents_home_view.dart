@@ -53,7 +53,7 @@ class ParentsHomeView extends StatelessWidget {
                 ),
                 enabled: false,
                 decoration: InputDecoration(
-                    labelText: 'Search',
+                    labelText: TranslationKeyManager.search.tr,
                     labelStyle: StyleManager.semiBold.copyWith(
                       fontSize: 15.0,
                     ),
@@ -97,7 +97,7 @@ class ParentsHomeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:
                       [
-                        const Text('Near By Schools', style: StyleManager.semiBold,),
+                        Text(TranslationKeyManager.nearBySchools.tr, style: StyleManager.semiBold,),
                         const SizedBox(
                           height: 5,
                         ),

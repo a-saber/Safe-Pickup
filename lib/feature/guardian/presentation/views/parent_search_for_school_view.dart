@@ -1,10 +1,12 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/search_schools/search_schools_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/search_schools/search_schools_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import 'widgets/school_level_card_builder.dart';
@@ -17,8 +19,8 @@ class ParentSearchForSchoolView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Search For School',
+      appBar:  CustomAppBar(
+        title: TranslationKeyManager.searchForSchool.tr,
         showPopup: true,
       ),
       body: Padding(
@@ -27,7 +29,7 @@ class ParentSearchForSchoolView extends StatelessWidget {
           children: [
             DefaultFormField(
               controller: searchController,
-              labelText: 'Search',
+              labelText: TranslationKeyManager.search.tr,
               textInputType: TextInputType.name,
               suffixIcon: const Icon(
                 IconlyLight.search,

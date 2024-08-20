@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
@@ -7,7 +8,6 @@ import 'package:call_son/feature/auth/presentation/cubit/logout_cubit/logout_sta
 import 'package:call_son/feature/auth/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
@@ -41,7 +41,7 @@ AlertDialog alertLogout(context) => AlertDialog(
                   height: 10,
                 ),
                 Text(
-                  'Sure you want to logout?',
+                  TranslationKeyManager.sureUWantToLogout.tr,
                   textAlign: TextAlign.center,
                   style: StyleManager.bold.copyWith(
                     fontSize: 22,
@@ -63,7 +63,7 @@ AlertDialog alertLogout(context) => AlertDialog(
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text('No, Cancel',
+                              child: Text(TranslationKeyManager.noCancel.tr,
                                   style: StyleManager.semiBold.copyWith(
                                     color: Colors.white,
                                     fontSize: 19,
@@ -108,7 +108,7 @@ AlertDialog alertLogout(context) => AlertDialog(
                                   child: Padding(
                                     padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                    child: Text('Yes, Logout',
+                                    child: Text(TranslationKeyManager.yesLogout.tr,
                                         style: StyleManager.semiBold.copyWith(
                                           color: ColorsManager.primary,
                                           fontSize: 19,

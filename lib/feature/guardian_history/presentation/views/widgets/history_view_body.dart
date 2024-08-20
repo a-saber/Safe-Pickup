@@ -1,3 +1,4 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/call_model.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/models/level_model.dart';
@@ -10,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 
@@ -41,7 +43,7 @@ class HistoryViewBody extends StatelessWidget {
         }
         if(callSnapshot.data!.docs.isEmpty)
         {
-          return const Center(child: Text('No Data'),);
+          return Center(child: Text(TranslationKeyManager.noData.tr),);
         }
         print(callSnapshot.data!.docs.length);
         return Expanded(

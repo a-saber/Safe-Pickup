@@ -122,7 +122,8 @@ class SettingItemBuilder extends StatelessWidget {
             const SizedBox(width: 10,),
             Text(title, style: StyleManager.semiBold.copyWith(fontSize: 17),),
             const Spacer(),
-            const Icon(IconlyLight.arrow_right_2, size: 20,),
+            Icon( CacheData.lang == CacheHelperKeys.keyEN?
+            IconlyLight.arrow_right_2 : IconlyLight.arrow_left_2, size: 20,),
           ],
         ),
       ),

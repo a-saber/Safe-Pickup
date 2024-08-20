@@ -2,12 +2,14 @@ import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field2.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/edit_kid/edit_kid_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/edit_kid/edit_kid_state.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class EditKidData extends StatelessWidget {
   EditKidData({super.key, required this.kid});
@@ -20,7 +22,7 @@ class EditKidData extends StatelessWidget {
   Widget build(BuildContext context) {
     nameController.text = kid.name??"";
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Edit Kid', showPopup: true,),
+      appBar:  CustomAppBar(title: '${TranslationKeyManager.edit.tr} ${TranslationKeyManager.kid.tr}', showPopup: true,),
       body: Form(
         key: formKey,
         child: Padding(
@@ -29,7 +31,7 @@ class EditKidData extends StatelessWidget {
             children:
             [
               DefaultFormField2(
-                hintText: "kid name",
+                hintText: TranslationKeyManager.kidName.tr,
                 textInputType: TextInputType.name,
                 controller: nameController,
               ),
@@ -43,7 +45,7 @@ class EditKidData extends StatelessWidget {
                   else if (state is EditKidSuccess) {
                     kid.name=nameController.text;
                     GetAllParentKidsCubit.get(context).getAllParentKids(superParentId: kid.superParentId!);
-                    callMySnackBar(context: context, text: 'Edited Successfully');
+                    callMySnackBar(context: context, text: TranslationKeyManager.editedSuccessfully.tr);
                   }
                 },
                 builder: (context, state) {
@@ -59,7 +61,7 @@ class EditKidData extends StatelessWidget {
                           EditKidCubit.get(context).editKid(kid: kid);
                         }
                       },
-                      text: "Edit");
+                      text: TranslationKeyManager.edit.tr);
                 },
               ),
             ],

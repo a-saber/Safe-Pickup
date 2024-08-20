@@ -2,6 +2,7 @@ import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
@@ -21,7 +22,7 @@ class ParentProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
     return Scaffold(
-      appBar: CustomAppBar(title: 'Profile', showPopup: true, ),
+      appBar: CustomAppBar(title: TranslationKeyManager.profile.tr, showPopup: true, ),
       body: BlocConsumer<GetParentCubit, GetParentState>(
         listener: (context, state)
         {
@@ -75,7 +76,7 @@ class ParentProfileView extends StatelessWidget {
                     ),
                     DefaultFormField(
                       enabled: false,
-                      labelText: 'Email',
+                      labelText: TranslationKeyManager.email.tr,
                       textInputType: TextInputType.emailAddress,
                       controller: email,
                       suffixIcon: const Icon(
@@ -87,7 +88,7 @@ class ParentProfileView extends StatelessWidget {
                       height: 20,
                     ),
                     DefaultFormField(
-                      labelText: 'Name',
+                      labelText: TranslationKeyManager.name.tr,
                       textInputType: TextInputType.text,
                       controller: name,
                       suffixIcon: const Icon(
@@ -99,7 +100,7 @@ class ParentProfileView extends StatelessWidget {
                       height: 20,
                     ),
                     DefaultFormField(
-                      labelText: 'Phone',
+                      labelText: TranslationKeyManager.phone.tr,
                       textInputType: TextInputType.phone,
                       controller: phone,
                       suffixIcon: const Icon(
@@ -111,7 +112,7 @@ class ParentProfileView extends StatelessWidget {
                       height: 20,
                     ),
                     DefaultFormField(
-                      labelText: 'SSN',
+                      labelText: TranslationKeyManager.ssn.tr,
                       textInputType: TextInputType.number,
                       controller: ssn,
                       suffixIcon: const Icon(
@@ -128,7 +129,7 @@ class ParentProfileView extends StatelessWidget {
                         }
                         else if(state is UpdateParentSuccess)
                         {
-                          callMySnackBar(context: context, text: 'Account Updated Successfully');
+                          callMySnackBar(context: context, text: TranslationKeyManager.accountUpdatedSuccessfully.tr);
                           GetParentCubit.get(context).getParent();
                         }
                       },
@@ -146,7 +147,7 @@ class ParentProfileView extends StatelessWidget {
                                 UpdateParentCubit.get(context).update(parent: parentModel);
                               }
                             },
-                            text: "Update");
+                            text: TranslationKeyManager.update.tr);
                       },
                     ),
                   ],

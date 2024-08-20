@@ -100,13 +100,13 @@ class _RequestPricingDropDown extends State<DefaultDropDown> {
 
 class KidsDropDown extends StatefulWidget {
   const KidsDropDown({
-    Key? key,
+    super.key,
     required this.text,
     required this.value,
     required this.textEditingController,
     required this.kids,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final String text;
   final KidModel? value;
   final List<KidModel> kids;
@@ -195,13 +195,13 @@ class _RequestPricingDropDown2 extends State<KidsDropDown> {
 
 class SchoolsDropDown extends StatefulWidget {
   const SchoolsDropDown({
-    Key? key,
+    super.key,
     required this.text,
     required this.textEditingController,
     required this.schools,
     required this.onChanged,
     required this.value,
-  }) : super(key: key);
+  });
   final String text;
   final List<SchoolModel> schools;
   final Function(SchoolModel?) onChanged;

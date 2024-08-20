@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
@@ -46,28 +47,23 @@ class SchoolHomeView extends StatelessWidget {
                       }
                     }),
                     const SizedBox(width: 10,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hello,',
-                          style: StyleManager.bold.copyWith(
-                            color: ColorsManager.primary),
-                        ),
-                        Row(
-                          children: [
-                            Text(cubit.schoolModel!.name ??'',
-                              style: StyleManager.regular.copyWith(
-                                fontSize: 15.0
-                              ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            TranslationKeyManager.hello.tr,
+                            style: StyleManager.bold.copyWith(
+                              color: ColorsManager.primary),
+                          ),
+                          Text(cubit.schoolModel!.name ??'',
+                            style: StyleManager.regular.copyWith(
+                              fontSize: 15.0
                             ),
-                            const Text(' School',
-                              style: StyleManager.semiBold,
-                            )
-                          ],
-                        ),
+                          ),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 )

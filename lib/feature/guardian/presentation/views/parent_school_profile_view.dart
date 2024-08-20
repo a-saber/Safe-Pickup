@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 
@@ -16,7 +18,7 @@ class ParentSchoolProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Profile", showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.profile.tr, showPopup: true,),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -25,7 +27,7 @@ class ParentSchoolProfileView extends StatelessWidget {
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
-              child: DefaultButton(onTap: (){}, text: 'Join Request'),
+              child: DefaultButton(onTap: (){}, text: TranslationKeyManager.joinRequest.tr),
             )
           ],
         ),
@@ -96,7 +98,7 @@ class ParentSchoolProfileImageCard extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height*0.4,
-                color:  schoolModel.imagePath == null? null:  ColorsManager.black.withOpacity(0.5),
+                color:  schoolModel.imagePath == null? null:  ColorsManager.black.withOpacity(0.3),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

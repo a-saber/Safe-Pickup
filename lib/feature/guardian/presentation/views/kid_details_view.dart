@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
@@ -25,7 +26,7 @@ class KidDetailsView extends StatelessWidget {
         builder: (context, state) {
       return Scaffold(
         appBar: CustomAppBar(
-            title: 'Schools', showPopup: true,
+            title: TranslationKeyManager.kidSchools.tr, showPopup: true,
           actions: 
           [
             IconButton(

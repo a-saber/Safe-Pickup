@@ -1,3 +1,4 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
@@ -9,6 +10,7 @@ import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_ki
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_state.dart';
 import 'package:call_son/feature/guardian/presentation/views/parent_kids_view.dart';
 import 'package:call_son/feature/guardian/presentation/views/parent_profile_view.dart';
+import 'package:call_son/feature/guardian/presentation/views/parent_settings_view.dart';
 import 'package:call_son/feature/guardian_history/presentation/views/history_view.dart';
 import 'package:call_son/feature/school/presentation/views/widgets/logout_alert.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,7 @@ class CustomDrawer extends StatelessWidget {
 
                               children: [
                                 Text(
-                                  'Hello, ',
+                                  TranslationKeyManager.hello.tr,
                                   style: StyleManager.medium.copyWith(
                                       fontSize: 15.0,
                                       color: ColorsManager.white
@@ -113,14 +115,14 @@ class CustomDrawer extends StatelessWidget {
 
                 ListTile(
                   leading: const Icon(IconlyLight.home,),
-                  title: const Text('Home'),
+                  title: Text(TranslationKeyManager.home.tr),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   leading: const Icon(IconlyLight.profile),
-                  title: const Text('Profile'),
+                  title:  Text(TranslationKeyManager.profile.tr),
                   onTap: () {
                     Get.to(()=> const ParentProfileView(),
                         duration: const Duration(milliseconds: 500),
@@ -129,7 +131,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(IconlyLight.time_square),
-                  title: const Text('History'),
+                  title:  Text(TranslationKeyManager.history.tr),
                   onTap: () {
                     Get.to(()=> const GuardianHistoryView(),
                         duration: const Duration(milliseconds: 500),
@@ -146,7 +148,7 @@ class CustomDrawer extends StatelessWidget {
                           {
                             return ListTile(
                               leading: const Icon(IconlyLight.work),
-                              title: const Text('Kids'),
+                              title:  Text(TranslationKeyManager.kids.tr),
                               onTap: () {
                                 if(allKidsState is ! GetAllParentKidsSuccess)
                                 {
@@ -169,7 +171,7 @@ class CustomDrawer extends StatelessWidget {
 
                         return ListTile(
                           leading: const Icon(IconlyLight.work),
-                          title: const Text('Kids'),
+                          title: Text(TranslationKeyManager.kids.tr),
                           onTap: () {
                             Get.to(()=> const ParentKidsView(),
                                 duration: const Duration(milliseconds: 500),
@@ -183,7 +185,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(IconlyLight.user_1),
-                  title: const Text('Schools'),
+                  title:  Text(TranslationKeyManager.schools.tr),
                   onTap: () {
                     // Handle School tap
                     Navigator.pop(context); // Close the drawer
@@ -191,15 +193,17 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(IconlyLight.setting),
-                  title: const Text('Settings'),
+                  title:  Text(TranslationKeyManager.settings.tr),
                   onTap: () {
-                    // Handle Settings tap
-                    Navigator.pop(context); // Close the drawer
+                    Get.to(()=> const ParentSettingsView(),
+                        duration: const Duration(milliseconds: 500),
+                        transition: DelayManager.rightToLeftWithFade
+                    );
                   },
                 ),
                 ListTile(
                   leading: const Icon(IconlyLight.logout),
-                  title: const Text('Logout'),
+                  title: Text(TranslationKeyManager.logout.tr),
                   onTap: () {
                     showDialog(
                         context: context,

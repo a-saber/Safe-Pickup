@@ -1,11 +1,12 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchDropDownFormField extends StatelessWidget {
   const SearchDropDownFormField(
-      {Key? key, required this.controller, required this.text})
-      : super(key: key);
+      {super.key, required this.controller, required this.text});
   final TextEditingController controller;
   final String text;
   @override
@@ -21,9 +22,9 @@ class SearchDropDownFormField extends StatelessWidget {
           horizontal: 10,
           vertical: 8,
         ),
-        hintText: 'Search ...',
-        hintStyle: StyleManager.semiBold.copyWith(
-          fontSize: 18.0,
+        hintText: TranslationKeyManager.search.tr,
+        hintStyle: StyleManager.regular.copyWith(
+          fontSize: 15.0,
         ),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
