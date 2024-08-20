@@ -16,6 +16,7 @@ class TranslationKeyManager {
 
   static const profile = 'profile';
   static const pickup = 'pickup';
+  static const pickupRequests = 'pickupRequests';
   static const waiting = 'waiting';
   static const accepted = 'accepted';
   static const rejected = 'rejected';
@@ -36,6 +37,7 @@ class TranslationKeyManager {
   static const logout = 'logout';
   static const yesLogout = 'Yes, Logout';
   static const noCancel = 'No, Cancel';
+  static const cancel = 'Cancel';
   static const sureUWantToLogout = 'Sure you want to logout?';
 
 
@@ -94,5 +96,11 @@ static const  yesDelete = 'Yes, Delete';
 static const  newSchoolLevel = 'New School Level';
 static const  add = 'Add';
 static const  addSuccessfully = 'Added Successfully';
+static const  loading = 'Loading...';
 
+  static const accept = 'accept';
+  static const reject = 'reject';
+
+  static const explainParentWhyReject = 'Explain to the Parents, why you reject the call !';
+  static const reason = 'reason';
 }

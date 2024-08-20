@@ -3,6 +3,7 @@ import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/core_widgets/more/default_switch.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/padding_manager.dart';
@@ -12,6 +13,7 @@ import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_sc
 import 'package:call_son/feature/school/presentation/cubit/update_school_data_cubit/update_school_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class SchoolProfileUpdateView extends StatefulWidget {
@@ -42,7 +44,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Update Profile", showPopup: true),
+      appBar: CustomAppBar(title: TranslationKeyManager.profile.tr, showPopup: true),
       body:  Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -58,7 +60,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                 ),
                 DefaultFormField(
                   enabled: false,
-                  labelText: 'Email',
+                  labelText: TranslationKeyManager.email.tr,
                   textInputType: TextInputType.emailAddress,
                   controller: TextEditingController(text: widget.schoolModel.email),
                   suffixIcon: const Icon(
@@ -70,7 +72,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Name',
+                  labelText: TranslationKeyManager.name.tr,
                   textInputType: TextInputType.text,
                   controller: name,
                   suffixIcon: const Icon(
@@ -82,7 +84,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Phone',
+                  labelText: TranslationKeyManager.phone.tr,
                   textInputType: TextInputType.phone,
                   controller: phone,
                   suffixIcon: const Icon(
@@ -94,7 +96,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Location',
+                  labelText: TranslationKeyManager.address.tr,
                   textInputType: TextInputType.text,
                   controller: location,
                   suffixIcon: const Icon(
@@ -106,7 +108,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                   height: 20,
                 ),
                 DefaultSwitch(
-                  text: "SSN Required",
+                  text: TranslationKeyManager.ssnRequired.tr,
                   switchVal: ssn,
                   onChanged: (val) {
                     setState(() {
@@ -125,7 +127,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                     }
                     else if(state is UpdateSchoolSuccess)
                     {
-                      callMySnackBar(context: context, text: 'Account Updated Successfully');
+                      callMySnackBar(context: context, text: TranslationKeyManager.accountUpdatedSuccessfully.tr);
                       GetSchoolCubit.get(context).getSchool();
                     }
                   },
@@ -145,7 +147,7 @@ class _SchoolProfileUpdateViewState extends State<SchoolProfileUpdateView> {
                             UpdateSchoolCubit.get(context).update(schoolModel: widget.schoolModel);
                           }
                         },
-                        text: "Update");
+                        text: TranslationKeyManager.update.tr);
                   },
                 ),
                 const SizedBox(

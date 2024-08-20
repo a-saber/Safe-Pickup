@@ -1,6 +1,8 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DefaultRemoveButton extends StatelessWidget {
   const DefaultRemoveButton({super.key, required this.onTap});
@@ -17,7 +19,7 @@ final Function() onTap;
           color: ColorsManager.primary,
         ),
         child: Center(
-          child: Text("Remove",style: StyleManager.regular.copyWith(
+          child: Text(TranslationKeyManager.remove.tr,style: StyleManager.regular.copyWith(
             color: ColorsManager.white,
           ),),
         ),

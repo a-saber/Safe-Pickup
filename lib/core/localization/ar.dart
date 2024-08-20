@@ -11,12 +11,13 @@ Map<String, String> ar =
 
   TranslationKeyManager.profile : 'الحساب',
   TranslationKeyManager.pickup : 'استدعاء',
+  TranslationKeyManager.pickupRequests : 'طلبات الاستدعاء',
   TranslationKeyManager.waiting : 'انتظار',
   TranslationKeyManager.accepted  : 'موافقة',
   TranslationKeyManager.rejected  : 'رفض',
   TranslationKeyManager.noData  : 'لا يوجد بيانات',
   TranslationKeyManager.parents  : 'اولياء الامور',
-  TranslationKeyManager.levels  : 'المستويات',
+  TranslationKeyManager.levels  : 'مستويات',
   TranslationKeyManager.editLevels  : 'تعديل المستويات',
   TranslationKeyManager.levelTitle  : 'اسم المستوي',
   TranslationKeyManager.remove  : 'حذف',
@@ -73,5 +74,11 @@ Map<String, String> ar =
   TranslationKeyManager.newSchoolLevel : 'مستوي جديد',
   TranslationKeyManager.add : 'اضافة',
   TranslationKeyManager.addSuccessfully : 'تمت الاضافة بنجاح',
+  TranslationKeyManager.loading : 'جاري التحميل...',
+  TranslationKeyManager.accept : 'قبول',
+  TranslationKeyManager.reject : 'رفض',
+  TranslationKeyManager.explainParentWhyReject : 'وضح الي ولي الامر سبب الرفض',
+  TranslationKeyManager.reason : 'السبب',
+  TranslationKeyManager.cancel : 'الغاء',
 
 };

@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:call_son/core/cache_helper/cache_data.dart';
+import 'package:call_son/core/cache_helper/cache_helper_keys.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
-import 'package:call_son/core/core_widgets/default_form/default_form_field2.dart';
 import 'package:call_son/core/core_widgets/pop_up/copy_clipboard.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/call_model.dart';
 import 'package:call_son/core/models/parent_model.dart';
 import 'package:call_son/core/models/kid_model.dart';
@@ -10,17 +14,14 @@ import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
-import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
 import 'package:call_son/feature/school/presentation/cubit/change_call_status/change_call_status_cubit.dart';
 import 'package:call_son/feature/school/presentation/cubit/change_call_status/change_call_status_state.dart';
-import 'package:call_son/feature/school/presentation/cubit/get_calls/get_calls_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:intl/intl.dart';
 
 
 class SchoolCallsViewBody extends StatelessWidget {
@@ -50,7 +51,10 @@ class SchoolCallsViewBody extends StatelessWidget {
         }
         if(callSnapshot.data!.docs.isEmpty)
         {
-          return const Center(child: Text('No Data'),);
+          return Center(child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(TranslationKeyManager.noData.tr),
+          ),);
         }
         return Expanded(
           child: ListView.builder(
@@ -109,17 +113,17 @@ class SchoolCallsViewBody extends StatelessWidget {
                                 return SchoolCallCardBuilder(callStatus: callStatus, call: callModel);
                               }
           
-                              return Text("loading");
+                              return Text(TranslationKeyManager.loading.tr);
                             },
                           );
                         }
           
-                        return Text("loading");
+                        return Text(TranslationKeyManager.loading.tr);
                       },
                     );
                   }
           
-                  return Text("loading");
+                  return Text(TranslationKeyManager.loading.tr);
                 },
               );
             }),
@@ -173,7 +177,22 @@ class SchoolCallCardBuilder extends StatelessWidget {
                     child: Row(
                       children:
                       [
-                        Icon(IconlyLight.call, size: 15,color: ColorsManager.grey,),
+                        Builder(
+                          builder: (context) {
+                            late double angle ;
+                            if(CacheData.lang == CacheHelperKeys.keyEN)
+                            {
+                              angle = 0;
+                            }
+                            else
+                            {
+                              angle = pi*-0.5;
+                            }
+                            return Transform.rotate(
+                              angle: angle,
+                              child: const Icon(IconlyLight.call, size: 15,color: ColorsManager.grey,));
+                          }
+                        ),
                         const SizedBox(width: 5,),
                         Text(
                             call.parentModel!.phone!,
@@ -210,18 +229,21 @@ class SchoolCallCardBuilder extends StatelessWidget {
                   Builder(
                       builder: (context) {
                         late Color color;
+                        late IconData icon;
                         if(callStatus == CallStatus.accepted)
                         {
                           color = ColorsManager.primary;
+                          icon = Icons.check_circle_outline;
                         }
                         else
                         {
+                          icon = Icons.cancel_outlined;
                           color = ColorsManager.secondary;
                         }
                         return Row(
                           children: [
                             Icon(
-                              Icons.check_circle_outline,
+                              icon,
                               size: 15,
                               color: color,
                             ),
@@ -270,7 +292,7 @@ class SchoolCallCardBuilder extends StatelessWidget {
                           {
                             return Expanded(
                               child: DefaultButton(
-                                text: 'Accept',
+                                text: TranslationKeyManager.accept.tr,
                                   onTap: ()
                                   {
                                     ChangeCallStatusCubit.get(context).changeCallStatus(
@@ -293,7 +315,7 @@ class SchoolCallCardBuilder extends StatelessWidget {
                                 builder: (context) => alertReject(context, call: call)
                             );
                           },
-                          text: 'Reject',
+                          text: TranslationKeyManager.reject.tr,
                         ),
                       ),
                     ],
@@ -336,7 +358,7 @@ Widget alertReject(context, {required CallModel call})
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Explain to the guardian, why you reject the call !',
+                  TranslationKeyManager.explainParentWhyReject.tr,
                   textAlign: TextAlign.center,
                   style: StyleManager.regular.copyWith(
                     fontSize: 18,
@@ -346,7 +368,7 @@ Widget alertReject(context, {required CallModel call})
                   height: 20,
                 ),
                 DefaultFormField(
-                    labelText: 'Reason',
+                    labelText: TranslationKeyManager.reason.tr,
                     controller: reply),
                 const SizedBox(
                   height: 20,
@@ -361,7 +383,7 @@ Widget alertReject(context, {required CallModel call})
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text('Cancel',
+                            child: Text(TranslationKeyManager.cancel.tr,
                                 style: StyleManager.regular.copyWith(
                                   color: Colors.white,
                                   fontSize: 19,
@@ -403,7 +425,7 @@ Widget alertReject(context, {required CallModel call})
                                 child: Padding(
                                   padding:
                                   const EdgeInsets.symmetric(vertical: 10),
-                                  child: Text('Reject',
+                                  child: Text(TranslationKeyManager.reject.tr,
                                       style: StyleManager.regular.copyWith(
                                         color: ColorsManager.primary,
                                         fontSize: 19,

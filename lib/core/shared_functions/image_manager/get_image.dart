@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/cubit/get_image_cubit.dart';
 import 'package:call_son/core/shared_functions/image_manager/cubit/get_image_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -63,7 +65,7 @@ class FileImageView extends StatelessWidget {
                   IconlyLight.camera,
                   color: Colors.white,
                   size: 20,
-                ), text: imagePath != null? 'Change Image':'Choose Image',),
+                ), text: imagePath != null? TranslationKeyManager.changeImage.tr:TranslationKeyManager.chooseImage.tr,),
               ),
             ],
           );

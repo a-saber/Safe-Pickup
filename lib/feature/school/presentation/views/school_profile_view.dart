@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/cubit/get_image_cubit.dart';
 import 'package:call_son/core/shared_functions/image_manager/cubit/get_image_state.dart';
@@ -24,7 +26,7 @@ class SchoolProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Profile", showPopup: true,),
+      appBar: CustomAppBar(title:TranslationKeyManager.profile.tr, showPopup: true,),
       body: BlocBuilder<GetSchoolCubit, GetSchoolState>(
         builder: (context, state) {
           var cubit = GetSchoolCubit.get(context);
@@ -142,7 +144,9 @@ class SchoolProfileImageCard extends StatelessWidget {
                               alignment: Alignment.topRight,
                               child: InkWell(
                                 onTap: () {
-                                  Get.to(()=> SchoolProfileUpdateView(schoolModel: schoolModel,));
+                                  Get.to(()=> SchoolProfileUpdateView(schoolModel: schoolModel,),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: DelayManager.rightToLeftWithFade,);
                                 },
                                 child: CircleAvatar(
                                   backgroundColor: ColorsManager.white.withOpacity(0.3),
@@ -155,7 +159,7 @@ class SchoolProfileImageCard extends StatelessWidget {
                               ),
                             ),
                             const Spacer(),
-                            Text('${schoolModel.name} School',
+                            Text('${schoolModel.name}',
                               textAlign: TextAlign.center,
                               style: StyleManager.bold.copyWith(
                                   color: ColorsManager.white,

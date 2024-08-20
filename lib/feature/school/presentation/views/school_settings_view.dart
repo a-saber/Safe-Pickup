@@ -27,7 +27,7 @@ class SchoolSettingsView extends StatelessWidget {
       [
         SettingItemBuilder(
           icon: IconlyLight.profile,
-          title: 'Profile',
+          title: TranslationKeyManager.profile.tr,
           onTap: () {
             Get.to(() => const SchoolProfileView(),
                 duration: const Duration(milliseconds: 500),
@@ -36,7 +36,7 @@ class SchoolSettingsView extends StatelessWidget {
         ),
         SettingItemBuilder(
           icon: IconlyLight.category,
-          title: 'Levels',
+          title: TranslationKeyManager.levels.tr,
           onTap: () {
             GetSchoolLevelsCubit.get(context).getLevels();
 
@@ -47,7 +47,7 @@ class SchoolSettingsView extends StatelessWidget {
         ),
         SettingItemBuilder(
           icon: IconlyLight.location,
-          title: 'Location',
+          title: TranslationKeyManager.location.tr,
           onTap: ()
           {
             LocationCubit.get(context).setLocationToCustom(
@@ -60,7 +60,7 @@ class SchoolSettingsView extends StatelessWidget {
         ),
         SettingItemBuilder(
           icon: IconlyLight.swap,
-          title: 'Language',
+          title: TranslationKeyManager.languages.tr,
           onTap: () async {
             if (CacheData.lang == CacheHelperKeys.keyEN) {
               await CacheHelper.saveData(
@@ -79,12 +79,12 @@ class SchoolSettingsView extends StatelessWidget {
         ),
         SettingItemBuilder(
           icon: IconlyLight.bag,
-          title: 'Students',
+          title: TranslationKeyManager.students.tr,
           onTap: () {},
         ),
         SettingItemBuilder(
           icon: IconlyLight.logout,
-          title: 'Logout',
+          title: TranslationKeyManager.logout.tr,
           onTap: () {
             showDialog(
                 context: context,

@@ -9,6 +9,7 @@ Map<String, String> en =
   TranslationKeyManager.schools: 'Schools',
   TranslationKeyManager.profile : 'Profile',
   TranslationKeyManager.pickup : 'Pickup',
+  TranslationKeyManager.pickupRequests : 'Pickup Requests',
   TranslationKeyManager.waiting : 'Waiting',
   TranslationKeyManager.accepted  : 'Accepted',
   TranslationKeyManager.rejected  : 'Rejected',
@@ -71,6 +72,12 @@ Map<String, String> en =
   TranslationKeyManager.newSchoolLevel : 'New School Level',
   TranslationKeyManager.add : 'Add',
   TranslationKeyManager.addSuccessfully : 'Add Successfully',
+  TranslationKeyManager.loading : 'Loading...',
+  TranslationKeyManager.accept : 'Accept',
+  TranslationKeyManager.reject : 'Reject',
+  TranslationKeyManager.explainParentWhyReject :  'Explain to the Parents, why you reject the call !',
+  TranslationKeyManager.reason :  'Reason',
+  TranslationKeyManager.cancel :  'Cancel',
 
 
 };

@@ -1,6 +1,7 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/location/location_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:call_son/feature/auth/presentation/views/location_view.dart';
 import 'package:call_son/feature/school/presentation/cubit/update_school_data_cubit/update_school_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SchoolChangeLocationView extends StatelessWidget {
@@ -16,7 +18,7 @@ class SchoolChangeLocationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Edit Location", showPopup: true,),
+      appBar:  CustomAppBar(title: TranslationKeyManager.updateLocation.tr, showPopup: true,),
       body: BlocConsumer<LocationCubit, LocationState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -29,7 +31,7 @@ class SchoolChangeLocationView extends StatelessWidget {
               children: [
                 DefaultCheckBox(
                   selected: cubit.useCurrent,
-                  text: 'Current Location',
+                  text: TranslationKeyManager.currentLocation.tr,
                   icon: AssetsManager.logo,
                   onTap: () {
                     cubit.chooseUserCurrent(true);
@@ -40,7 +42,7 @@ class SchoolChangeLocationView extends StatelessWidget {
                 ),
                 DefaultCheckBox(
                   selected: cubit.useAnother,
-                  text: 'Pick another location',
+                  text: TranslationKeyManager.pickAnotherLocation.tr,
                   icon: AssetsManager.logo,
                   onTap: () {
                     cubit.chooseAnotherLocation(true);
@@ -65,7 +67,7 @@ class SchoolChangeLocationView extends StatelessWidget {
                       BlocConsumer<UpdateSchoolCubit, UpdateSchoolState>(
                         listener: (context, state) {
                           if(state is UpdateSchoolSuccess){
-                            callMySnackBar(context: context, text: 'Location Updated');
+                            callMySnackBar(context: context, text: TranslationKeyManager.editedSuccessfully.tr);
                             Navigator.pop(context);
                             Navigator.pop(context);
                           }
@@ -100,7 +102,7 @@ class SchoolChangeLocationView extends StatelessWidget {
                                       UpdateSchoolCubit.get(context).updateLocation(schoolModel: GetSchoolCubit.get(context).schoolModel!);
                                     }
                                   },
-                                  text: 'Edit',
+                                  text: TranslationKeyManager.update.tr,
                                 )
                             );
                           }

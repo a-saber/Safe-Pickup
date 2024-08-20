@@ -30,11 +30,11 @@ class SchoolLayoutCubit extends Cubit<SchoolLayoutState> {
         break;
       case 1:
         currentScreen = const SchoolCallsView();
-        currentTitle = 'Pickup Requests';
+        currentTitle = TranslationKeyManager.pickupRequests;
         break;
       case 2:
         currentScreen = const SchoolGuardiansView();
-        currentTitle = 'Parents Requests';
+        currentTitle = TranslationKeyManager.parents;
         break;
       case 3:
         currentScreen = const SchoolSettingsView();

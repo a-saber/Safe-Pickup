@@ -1,6 +1,8 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/call_model.dart';
 import 'package:call_son/feature/school/presentation/views/widgets/school_calls_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/core_widgets/my_tab_bar_view.dart';
 
@@ -40,13 +42,13 @@ class _SchoolCallsViewState extends State<SchoolCallsView> {
           tabs: [
             TabBarItem(
                 selected: callStatus == CallStatus.waiting,
-                label: 'Waiting'),
+                label: TranslationKeyManager.waiting.tr),
             TabBarItem(
                 selected: callStatus == CallStatus.accepted,
-                label: 'Accepted'),
+                label: TranslationKeyManager.accepted.tr),
             TabBarItem(
                 selected: callStatus == CallStatus.rejected,
-                label: 'Rejected'),
+                label: TranslationKeyManager.rejected.tr),
           ],
         ),
         Builder(

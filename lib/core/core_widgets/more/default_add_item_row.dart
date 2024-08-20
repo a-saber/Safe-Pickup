@@ -1,6 +1,8 @@
 import 'package:call_son/core/core_widgets/default_button/remove_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DefaultAddItemRow extends StatelessWidget {
   const DefaultAddItemRow(
@@ -43,7 +45,7 @@ class DefaultAddItemRow extends StatelessWidget {
       children: [
         Expanded(
           child: DefaultFormField(
-            labelText: 'Level Title',
+            labelText: TranslationKeyManager.levelTitle.tr,
             controller: controller,
             maxLines: maxLines,
             suffixIcon: suffixIcon,

@@ -3,11 +3,13 @@ import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/more/default_add_item_row.dart';
 import 'package:call_son/core/core_widgets/more/default_add_row.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/feature/school/presentation/cubit/edit_school_levels_cubit/edit_school_levels_cubit.dart';
 import 'package:call_son/feature/school/presentation/cubit/get_school_levels_cubit/get_school_levels_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class SchoolEditLevels extends StatefulWidget {
   const SchoolEditLevels({super.key});
@@ -22,7 +24,7 @@ class _SchoolEditLevelsState extends State<SchoolEditLevels> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Edit Levels", showPopup: true,),
+      appBar:  CustomAppBar(title: TranslationKeyManager.editLevels.tr, showPopup: true,),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -40,7 +42,7 @@ class _SchoolEditLevelsState extends State<SchoolEditLevels> {
                     children:
                     [
                       DefaultAddRow(
-                        text: "Levels",
+                        text: TranslationKeyManager.levels.tr,
                         number: state.levels.length,
                         onPressed: () {
                           setState(() {
@@ -91,7 +93,7 @@ class _SchoolEditLevelsState extends State<SchoolEditLevels> {
                           }
                           else if(state is EditSchoolLevelsSuccess)
                           {
-                            callMySnackBar(context: context, text: 'Levels Edited Successfully');
+                            callMySnackBar(context: context, text: TranslationKeyManager.editedSuccessfully.tr);
                           }
                         },
                         builder: (context, editState) {
@@ -105,7 +107,7 @@ class _SchoolEditLevelsState extends State<SchoolEditLevels> {
                                   EditSchoolLevelsCubit.get(context).editLevels(levels: state.levels);
                                 }
                               },
-                              text: "Edit");
+                              text: TranslationKeyManager.edit.tr);
                         },
                       ),
 
