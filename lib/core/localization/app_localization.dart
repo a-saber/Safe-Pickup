@@ -21,9 +21,9 @@ class AppLocalization implements Translations {
 
     if (CacheData.lang == null) {
       await CacheHelper.saveData(
-          key: CacheHelperKeys.langKey, value: CacheHelperKeys.keyEN);
-      await Get.updateLocale(TranslationKeyManager.localeEN);
-      CacheData.lang = CacheHelperKeys.keyEN;
+          key: CacheHelperKeys.langKey, value: CacheHelperKeys.keyAR);
+      await Get.updateLocale(TranslationKeyManager.localeAR);
+      CacheData.lang = CacheHelperKeys.keyAR;
     }
   }
 }

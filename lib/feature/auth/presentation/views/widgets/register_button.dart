@@ -1,4 +1,5 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/parent_model.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
@@ -27,7 +28,7 @@ class RegisterButton extends StatelessWidget {
       {
         if(state is ParentRegisterSuccess)
         {
-          callMySnackBar(context: context, text: 'Registered Successfully\nPlease verify your email', backgroundColor: ColorsManager.primary);
+          callMySnackBar(context: context, text: TranslationKeyManager.registerSuccessVerifyEmail.tr, backgroundColor: ColorsManager.primary);
           Get.off(()=> const LoginView(),
           duration: const Duration(milliseconds: 500),
           transition: DelayManager.rightToLeftWithFade);
@@ -70,7 +71,7 @@ class RegisterButton extends StatelessWidget {
                         );
                       }
                     },
-                    text: "Register"),
+                    text: TranslationKeyManager.register.tr),
               ],
             );
           },

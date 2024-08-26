@@ -1,5 +1,7 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'widgets/school_register_view_body.dart';
 
 class SchoolRegisterView extends StatelessWidget {
@@ -7,9 +9,9 @@ class SchoolRegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: "New School", showPopup: true,),
-      body: SchoolRegisterViewBody(),
+    return Scaffold(
+      appBar: CustomAppBar(title: TranslationKeyManager.newSchool.tr, showPopup: true,),
+      body: const SchoolRegisterViewBody(),
     );
   }
 }

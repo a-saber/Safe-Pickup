@@ -12,7 +12,9 @@ class TranslationKeyManager {
   static const settings = 'settings';
   static const hello = 'hello';
   static const school = 'school';
+  static const schoolA = 'schoolA';
   static const schools = 'schools';
+  static const all = 'all';
 
   static const profile = 'profile';
   static const pickup = 'pickup';
@@ -24,6 +26,7 @@ class TranslationKeyManager {
 
   static const parents  = 'parents';
   static const levels = 'levels';
+  static const levelsA = 'levelsA';
   static const editLevels  = 'edit levels';
   static const levelTitle = 'level title';
   static const remove    = 'remove';
@@ -44,6 +47,7 @@ class TranslationKeyManager {
   static const login = 'login';
   static const email = 'email';
   static const password = 'password';
+  static const passwordDoNotMatch = 'passwordDoNotMatch';
   static const forgotPassword = 'forgot password';
   static const registerNow = 'register now';
   static const doNotHaveAnAccount = 'don\'t have an account ?';
@@ -74,6 +78,7 @@ class TranslationKeyManager {
   static const search = 'search';
   static const searchForSchool = 'search for school';
   static const kids = 'kids';
+  static const kidsA = 'kidsA';
   static const kid = 'kid';
   static const kidSchool = 'kid school';
   static const kidSchools = 'kid schools';
@@ -89,6 +94,7 @@ class TranslationKeyManager {
 
 static const pickupRequestedSuccessfully = 'Pickup Requested Successfully';
 static const accountUpdatedSuccessfully = 'Account Updated Successfully';
+static const registerSuccessVerifyEmail = 'Register Success, Verify Email';
 static const editedSuccessfully = 'Edited Successfully';
 static const pleaseSelectNewLevel = 'Please select New level';
 static const  sureUWantToDelete  = 'Sure you want to Delete?';
@@ -103,4 +109,6 @@ static const  loading = 'Loading...';
 
   static const explainParentWhyReject = 'Explain to the Parents, why you reject the call !';
   static const reason = 'reason';
+  static const plzChooseSchool = 'Please choose school first';
+  static const notEmpty = 'Must not be empty';
 }

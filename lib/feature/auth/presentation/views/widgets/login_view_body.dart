@@ -2,6 +2,7 @@ import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/core_widgets/logo_widget.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/padding_manager.dart';
@@ -50,7 +51,7 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Email',
+                  labelText: TranslationKeyManager.email.tr,
                   textInputType: TextInputType.emailAddress,
                   controller: email,
                   suffixIcon: const Icon(
@@ -62,7 +63,7 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Password',
+                  labelText: TranslationKeyManager.password.tr,
                   textInputType: TextInputType.text,
                   controller: password,
                   isPassword: showPassword,
@@ -90,9 +91,9 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                       duration: const Duration(milliseconds: 500),
                       transition: DelayManager.rightToLeftWithFade);
                     },
-                    child: const Text(
-                      'Forget Password ?',
-                      style: TextStyle(
+                    child: Text(
+                      TranslationKeyManager.forgotPassword.tr,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: ColorsManager.primary,
                       ),
@@ -138,14 +139,14 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                                 email: email.text, password: password.text);
                           }
                         },
-                        text: "Login");
+                        text: TranslationKeyManager.login.tr);
                   },
                 ),
 
                 // Register
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Text(
-                    'Don\'t have an account ?',
+                  Text(
+                    TranslationKeyManager.doNotHaveAnAccount.tr,
                     style: StyleManager.regular,
                   ),
                   TextButton(
@@ -156,9 +157,9 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                           transition: DelayManager.rightToLeftWithFade
                         );
                       },
-                      child: const Text(
-                        'Register Now',
-                        style: TextStyle(
+                      child: Text(
+                        TranslationKeyManager.registerNow.tr,
+                        style: const TextStyle(
                           fontSize: 14,
                           color: ColorsManager.primary,
                         ),

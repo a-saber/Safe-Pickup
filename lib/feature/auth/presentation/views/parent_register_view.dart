@@ -3,6 +3,7 @@ import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/core_widgets/more/default_add_row.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
@@ -33,7 +34,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
     var scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
-      appBar: const CustomAppBar(title: "New Parent", showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.newParent.tr, showPopup: true,),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
@@ -53,7 +54,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                         const IconImageViewer(isSchool: false,),
                         const SizedBox(height: 20,),
                         DefaultFormField(
-                          labelText: 'Name',
+                          labelText: TranslationKeyManager.name.tr,
                           textInputType: TextInputType.name,
                           controller: cubit.nameController,
                           suffixIcon: const Icon(
@@ -65,7 +66,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                           height: 15,
                         ),
                         DefaultFormField(
-                          labelText: 'SSN',
+                          labelText: TranslationKeyManager.ssn.tr,
                           textInputType: TextInputType.number,
                           controller: cubit.ssnController,
                           suffixIcon: const Icon(
@@ -77,7 +78,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                           height: 15,
                         ),
                         DefaultFormField(
-                          labelText: 'Phone',
+                          labelText: TranslationKeyManager.phone.tr,
                           textInputType: TextInputType.phone,
                           controller: cubit.phoneController,
                           suffixIcon: const Icon(
@@ -89,7 +90,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                           height: 15,
                         ),
                         DefaultFormField(
-                          labelText: 'Email',
+                          labelText: TranslationKeyManager.email.tr,
                           textInputType: TextInputType.emailAddress,
                           controller: cubit.emailController,
                           suffixIcon: const Icon(
@@ -101,7 +102,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                           height: 15,
                         ),
                         DefaultFormField(
-                          labelText: 'Password',
+                          labelText: TranslationKeyManager.password.tr,
                           textInputType: TextInputType.text,
                           controller: cubit.passwordController,
                           isPassword: !passVisible,
@@ -120,7 +121,7 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                           height: 15,
                         ),
                         DefaultFormField(
-                          labelText: 'Confirm Password',
+                          labelText: TranslationKeyManager.confirmPassword.tr,
                           textInputType: TextInputType.text,
                           controller: cubit.confirmPasswordController,
                           isPassword: !confirmPassVisible,
@@ -155,10 +156,10 @@ class _ParentRegisterViewState extends State<ParentRegisterView> {
                       }
                       else
                       {
-                        callMySnackBar(context: context, text: 'Password does not match');
+                        callMySnackBar(context: context, text: TranslationKeyManager.passwordDoNotMatch.tr);
                       }
                     }
-                  }, text: 'Continue')
+                  }, text: TranslationKeyManager.continueBTN.tr)
               ],
             ),
           ),
@@ -189,7 +190,7 @@ class _ParentAssignKidsState extends State<ParentAssignKids> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      appBar: const CustomAppBar(title: "Assign Kids", showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.assignKids.tr, showPopup: true,),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),

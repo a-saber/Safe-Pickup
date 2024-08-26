@@ -1,3 +1,4 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Name',
+                  labelText: TranslationKeyManager.name.tr,
                   textInputType: TextInputType.text,
                   controller: name,
                   suffixIcon: const Icon(
@@ -72,7 +73,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Phone',
+                  labelText: TranslationKeyManager.phone.tr,
                   textInputType: TextInputType.phone,
                   controller: phone,
                   suffixIcon: const Icon(
@@ -84,7 +85,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Email',
+                  labelText: TranslationKeyManager.email.tr,
                   textInputType: TextInputType.emailAddress,
                   controller: email,
                   suffixIcon: const Icon(
@@ -96,7 +97,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Password',
+                  labelText: TranslationKeyManager.password.tr,
                   textInputType: TextInputType.text,
                   controller: password,
                   isPassword: showPassword,
@@ -117,7 +118,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultFormField(
-                  labelText: 'Confirm Password',
+                  labelText: TranslationKeyManager.confirmPassword.tr,
                   textInputType: TextInputType.text,
                   controller: passwordConfirm,
                   isPassword: showPasswordConfirm,
@@ -138,7 +139,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultSwitch(
-                  text: "SSN Required",
+                  text: TranslationKeyManager.ssnRequired.tr,
                   switchVal: ssn,
                   onChanged: (val) {
                     setState(() {
@@ -150,7 +151,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                   height: 20,
                 ),
                 DefaultAddRow(
-                  text: "Levels",
+                  text: TranslationKeyManager.levelsA.tr,
                   number: levels.length,
                   onPressed: () {
                     setState(() {
@@ -192,7 +193,7 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                     }
                     else if(state is SchoolRegisterSuccess)
                     {
-                      callMySnackBar(context: context, text: 'Verification Email Sent to Your Email\nPlease Verify Your Email');
+                      callMySnackBar(context: context, text: TranslationKeyManager.registerSuccessVerifyEmail.tr);
                       Get.off(() => const LoginView(),
                       duration: const Duration(milliseconds: 500),
                       transition: DelayManager.rightToLeftWithFade);
@@ -220,11 +221,11 @@ class _SchoolRegisterViewBodyState extends State<SchoolRegisterViewBody> {
                              SchoolRegisterCubit.get(context).register();
                            }
                            else {
-                             callMySnackBar(context: context, text: 'Password not match');
+                             callMySnackBar(context: context, text: TranslationKeyManager.passwordDoNotMatch.tr);
                            }
                           }
                         },
-                        text: "Register");
+                        text: TranslationKeyManager.register.tr);
                   },
                 ),
                 const SizedBox(

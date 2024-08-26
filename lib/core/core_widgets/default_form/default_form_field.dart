@@ -1,6 +1,8 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DefaultFormField extends StatelessWidget {
   const DefaultFormField({
@@ -42,7 +44,7 @@ class DefaultFormField extends StatelessWidget {
       validator: validator ??
               (value) {
         if (value!.isEmpty) {
-          return 'Must not be empty';
+          return  TranslationKeyManager.notEmpty.tr;
         }
         return null;
       },

@@ -1,11 +1,13 @@
 import 'package:call_son/core/core_widgets/default_form/default_form_field2.dart';
 import 'package:call_son/core/core_widgets/more/default_add_row.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/guardian_register_ui/guardian_register_ui_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/guardian_register_ui/guardian_register_ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 
@@ -23,7 +25,7 @@ class ParentKidsData extends StatelessWidget {
           children:
           [
             DefaultAddRow(
-                text: "Kids",
+                text: TranslationKeyManager.kidsA.tr,
                 number: cubit.kids.length,
                 icon: IconlyLight.add_user,
                 onPressed: ParentRegisterUiCubit.get(context).addNewChild
@@ -46,7 +48,7 @@ class ParentKidsData extends StatelessWidget {
                       child: Column(
                         children: [
                           DefaultFormField2(
-                            hintText: "kid name",
+                            hintText: TranslationKeyManager.kidName.tr,
                             textInputType: TextInputType.name,
                             controller: cubit.kids[index].nameController,
                           ),
@@ -56,7 +58,7 @@ class ParentKidsData extends StatelessWidget {
                             child: DefaultAddRow(
                               isInner: true,
                               number: cubit.kids[index].schools.length,
-                                text: "Schools",
+                                text: TranslationKeyManager.schools.tr,
                                 onPressed: (){cubit.addSchool(kidIndex: index);}
                             ),
                           ),
@@ -89,7 +91,7 @@ class ParentKidsData extends StatelessWidget {
                                           });
                                         },
                                         child: DefaultFormField2(
-                                          hintText: 'School',
+                                          hintText: TranslationKeyManager.school.tr,
                                             enabled: false,
                                             controller: TextEditingController(
                                                 text: cubit.kids[index].schools[schoolIndex].name ?? ''
@@ -104,7 +106,7 @@ class ParentKidsData extends StatelessWidget {
                                           {
                                             if(cubit.kids[index].schools[schoolIndex].id==null)
                                             {
-                                              callMySnackBar(backgroundColor: ColorsManager.red,context: context, text: 'Please choose school first');
+                                              callMySnackBar(backgroundColor: ColorsManager.red,context: context, text: TranslationKeyManager.plzChooseSchool.tr);
                                             }
                                             else
                                             {
@@ -130,11 +132,11 @@ class ParentKidsData extends StatelessWidget {
                                                       decoration: BoxDecoration(
                                                         //color: Colors.white,
                                                           color: Theme.of(context).scaffoldBackgroundColor,
-                                                          borderRadius: BorderRadius.only(
+                                                          borderRadius: const BorderRadius.only(
                                                             topRight: Radius.circular(20),
                                                             topLeft: Radius.circular(20),
                                                           )),
-                                                      padding: EdgeInsets.symmetric(
+                                                      padding: const EdgeInsets.symmetric(
                                                           vertical: 20),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,14 +146,15 @@ class ParentKidsData extends StatelessWidget {
                                                             child: Column(
                                                               children: [
                                                                 Container(
-                                                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                                                  padding: const EdgeInsets.symmetric(horizontal: 30),
                                                                   width: double.infinity,
                                                                   color: Colors.grey.withOpacity(0.2),
                                                                   child: Text(
-                                                                    '${cubit.kids[index].schools[schoolIndex].name ?? ''} Levels',
+                                                                    '${cubit.kids[index].schools[schoolIndex].name ?? ''} ${TranslationKeyManager.levels.tr}',
                                                                     style: const TextStyle(
                                                                         color: Colors.grey,
-                                                                        fontWeight: FontWeight.bold),
+                                                                        fontWeight: FontWeight.bold
+                                                                    ),
                                                                   ),
                                                                 ),
                                                                 const SizedBox(
@@ -216,7 +219,7 @@ class ParentKidsData extends StatelessWidget {
                                             }
                                           },
                                           child: DefaultFormField2(
-                                            hintText: 'Level',
+                                            hintText: TranslationKeyManager.level.tr,
                                               enabled: false,
                                               controller: TextEditingController(
                                                   text: cubit.kids[index].schools[schoolIndex].kidLevelModel!=null ?

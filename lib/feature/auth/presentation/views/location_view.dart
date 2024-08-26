@@ -1,5 +1,6 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
@@ -30,7 +31,7 @@ class _LocationViewState extends State<LocationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'School Location', showPopup: true,),
+      appBar:  CustomAppBar(title:  TranslationKeyManager.location.tr, showPopup: true,),
       body: BlocConsumer<LocationCubit, LocationState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -43,7 +44,7 @@ class _LocationViewState extends State<LocationView> {
               children: [
                 DefaultCheckBox(
                   selected: cubit.useCurrent,
-                  text: 'Current Location',
+                  text: TranslationKeyManager.currentLocation.tr,
                   icon: AssetsManager.logo,
                   onTap: () {
                     cubit.chooseUserCurrent(true);
@@ -54,7 +55,7 @@ class _LocationViewState extends State<LocationView> {
                 ),
                 DefaultCheckBox(
                   selected: cubit.useAnother,
-                  text: 'Pick another location',
+                  text: TranslationKeyManager.pickAnotherLocation.tr,
                   icon: AssetsManager.logo,
                   onTap: () {
                     cubit.chooseAnotherLocation(true);
@@ -97,7 +98,7 @@ class _LocationViewState extends State<LocationView> {
                                   Get.to(() => const SchoolRegisterView());
                                 }
                               },
-                              text: 'Continue'
+                              text: TranslationKeyManager.continueBTN.tr
                           )
                       ),
                     ],

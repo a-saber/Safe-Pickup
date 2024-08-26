@@ -22,20 +22,23 @@ class DefaultAddRow extends StatelessWidget {
   Widget build(BuildContext context) {
     double fontSize = isInner? 14.0 :18.0;
     return Row(
-      children: [
-        Text(
-          number.toString(),
-          style: StyleManager.semiBold.copyWith(
-            fontSize: fontSize,
-          ),
-        ),
-        const SizedBox(width: 5,),
+      children:
+      [
         Text(
           text,
           style: StyleManager.semiBold.copyWith(
             fontSize: fontSize,
           ),
         ),
+        const SizedBox(width: 5,),
+        Text(
+          number.toString(),
+          style: StyleManager.semiBold.copyWith(
+            fontSize: fontSize,
+          ),
+        ),
+
+
 
         const Spacer(),
 

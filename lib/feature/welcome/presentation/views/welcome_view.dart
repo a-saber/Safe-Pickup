@@ -1,5 +1,6 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
 import 'package:call_son/core/core_widgets/default_button/default_button.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/feature/auth/presentation/views/parent_register_view.dart';
@@ -21,7 +22,7 @@ class _WelcomeViewState extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Choose Your User Type", showPopup: true,),
+      appBar: CustomAppBar(title:TranslationKeyManager.chooseYUserType.tr, showPopup: true,),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -39,7 +40,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                   },
                   image: AssetsManager.school,
                   isSelected: schoolSelected ==null?false:schoolSelected!,
-                  text: "School",
+                  text: TranslationKeyManager.school.tr,
                 ),
                 const SizedBox(
                   width: 70,
@@ -52,7 +53,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     });
                   },
                   image: AssetsManager.family, isSelected: schoolSelected ==null?false: !schoolSelected!,
-                  text: "Parents",
+                  text: TranslationKeyManager.parents.tr,
                 ),
               ],
             ),
@@ -73,7 +74,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       duration: const Duration(milliseconds: 500),
                       transition: DelayManager.rightToLeftWithFade);
                 }
-              }, text: 'Continue')
+              }, text: TranslationKeyManager.continueBTN.tr)
           ],
         ),
       ),

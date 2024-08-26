@@ -1,9 +1,11 @@
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_schools/get_school_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_schools/get_schools_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class SchoolsBottomSheetBody extends StatelessWidget {
   const SchoolsBottomSheetBody({super.key,
@@ -80,7 +82,7 @@ class SchoolsBottomSheetBody extends StatelessWidget {
                     else if (state is GetSchoolsSuccess)
                     {
                       return SchoolBottomSheetListBuilder(
-                          title: 'All Schools',
+                          title: '${TranslationKeyManager.all.tr} ${TranslationKeyManager.schools.tr}',
                           schools: state.schools,
                           onTap: onTap
                       );
