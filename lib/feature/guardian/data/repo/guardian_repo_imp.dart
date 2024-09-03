@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:call_son/core/errors/failures.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/core/models/school_kid_model.dart';
@@ -13,6 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/models/parent_model.dart';
 import 'guardian_repo.dart';
@@ -566,7 +568,7 @@ static late ParentModel guardianModel;
       }
       else
       {
-        return left(DataFailure('the distance is too far please come closer'));
+        return left(DataFailure(TranslationKeyManager.tooFar.tr));
       }
     } catch (e) {
       print(e.toString());

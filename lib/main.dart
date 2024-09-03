@@ -17,6 +17,7 @@ void main() async
   await AppLocalization.setLanguage();
 
   setupForgotPassSingleton();
+
   runApp(const MyApp());
 
 }

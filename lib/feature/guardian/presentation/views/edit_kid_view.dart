@@ -119,7 +119,7 @@ class _EditKidSchoolLevelState extends State<EditKidSchoolLevel> {
                                       width: double.infinity,
                                       color: Colors.grey.withOpacity(0.2),
                                       child: Text(
-                                        '${widget.school.name ?? ''} Levels',
+                                        widget.school.name ?? '',
                                         style: const TextStyle(
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold),
@@ -334,9 +334,9 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                                       padding: const EdgeInsets.symmetric(horizontal: 30),
                                       width: double.infinity,
                                       color: Colors.grey.withOpacity(0.2),
-                                      child: const Text(
-                                        'Schools',
-                                        style: TextStyle(
+                                      child: Text(
+                                        TranslationKeyManager.schools.tr,
+                                        style: const TextStyle(
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -424,7 +424,7 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                   });
                 },
                 child: DefaultFormField2(
-                    hintText: 'School',
+                    hintText: TranslationKeyManager.schoolA.tr,
                     enabled: false,
                     controller: TextEditingController(
                         text: school != null ? school!.name: ''
@@ -478,7 +478,7 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                                       width: double.infinity,
                                       color: Colors.grey.withOpacity(0.2),
                                       child: Text(
-                                        '${school!.name ?? ''} Levels',
+                                        school!.name ?? '',
                                         style: const TextStyle(
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold),
@@ -566,7 +566,7 @@ class _NewKidSchoolState extends State<NewKidSchool> {
                   });
                 },
                 child: DefaultFormField2(
-                    hintText: 'Level',
+                    hintText: TranslationKeyManager.level.tr,
                     enabled: false,
                     controller: TextEditingController(
                         text: school!.kidLevelModel ==null? '': school!.kidLevelModel!.name

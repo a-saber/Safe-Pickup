@@ -8,12 +8,10 @@ import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:intl/intl.dart';
 
 
 class HistoryViewBody extends StatelessWidget {
@@ -45,7 +43,6 @@ class HistoryViewBody extends StatelessWidget {
         {
           return Center(child: Text(TranslationKeyManager.noData.tr),);
         }
-        print(callSnapshot.data!.docs.length);
         return Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -59,11 +56,11 @@ class HistoryViewBody extends StatelessWidget {
                       .doc(callModel.kidId).get(),
                   builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
                     if (kidSnapshot.hasError) {
-                      return Text("Something went wrong");
+                      return Text(TranslationKeyManager.someThingWentWrong.tr);
                     }
 
                     if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
-                      return Text("Document does not exist");
+                      return Text(TranslationKeyManager.someThingWentWrong.tr);
                     }
 
                     if (kidSnapshot.connectionState == ConnectionState.done) {
@@ -74,11 +71,11 @@ class HistoryViewBody extends StatelessWidget {
                         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
 
                           if (schoolSnapshot.hasError) {
-                            return Text("Something went wrong");
+                            return Text(TranslationKeyManager.someThingWentWrong.tr);
                           }
 
                           if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
-                            return Text("Document does not exist");
+                            return Text(TranslationKeyManager.someThingWentWrong.tr);
                           }
 
                           if (schoolSnapshot.connectionState == ConnectionState.done) {
@@ -90,11 +87,11 @@ class HistoryViewBody extends StatelessWidget {
                               builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
                                 if (snapshot.hasError) {
-                                  return Text("Something went wrong");
+                                  return Text(TranslationKeyManager.someThingWentWrong.tr);
                                 }
 
                                 if (snapshot.hasData && !snapshot.data!.exists) {
-                                  return Text("Document does not exist");
+                                  return Text(TranslationKeyManager.someThingWentWrong.tr);
                                 }
 
                                 if (snapshot.connectionState == ConnectionState.done) {
@@ -102,17 +99,17 @@ class HistoryViewBody extends StatelessWidget {
                                   return CallCardBuilder(callStatus: callStatus, call: callModel);
                                 }
 
-                                return Text("loading");
+                                return Text(TranslationKeyManager.loading.tr);
                               },
                             );
                           }
 
-                          return Text("loading");
+                          return Text(TranslationKeyManager.loading.tr);
                         },
                       );
                     }
 
-                    return Text("loading");
+                    return Text(TranslationKeyManager.loading.tr);
                   },
                 );
               })
@@ -161,7 +158,7 @@ class CallCardBuilder extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${call.schoolModel!.name} School',
+                        '${call.schoolModel!.name}',
                         style: StyleManager.semiBold
                             .copyWith(fontSize: 15.0),
                       ),
@@ -194,7 +191,7 @@ class CallCardBuilder extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            call.createdAt!.toDate().toString().substring(0, 16) ?? '',
+                            call.createdAt!.toDate().toString().substring(0, 16),
                             style: StyleManager.semiBold.copyWith(
                                 color: ColorsManager.grey,
                                 fontSize: 12.0),
@@ -225,7 +222,7 @@ class CallCardBuilder extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                call.editedAt!.toDate().toString().substring(0, 16) ?? '',
+                                call.editedAt!.toDate().toString().substring(0, 16),
                                 style: StyleManager.semiBold.copyWith(
                                     color: color,
                                     fontSize: 12.0),

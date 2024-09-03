@@ -27,7 +27,9 @@ class ParentSchoolProfileView extends StatelessWidget {
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
-              child: DefaultButton(onTap: (){}, text: TranslationKeyManager.joinRequest.tr),
+              child: DefaultButton(
+                  onTap: (){},
+                  text: TranslationKeyManager.joinRequest.tr),
             )
           ],
         ),
@@ -105,7 +107,7 @@ class ParentSchoolProfileImageCard extends StatelessWidget {
                     children:
                     [
                       const Spacer(),
-                      Text('${schoolModel.name} School',
+                      Text('${schoolModel.name}',
                         textAlign: TextAlign.center,
                         style: StyleManager.bold.copyWith(
                             color: ColorsManager.white,

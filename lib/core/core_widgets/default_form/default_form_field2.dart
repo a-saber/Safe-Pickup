@@ -61,6 +61,7 @@ class DefaultFormField2 extends StatelessWidget {
       cursorColor: ColorsManager.primary,
       enabled: enabled,
       decoration: InputDecoration(
+
         hintText: hintText,
         labelStyle: StyleManager.regular.copyWith(
             fontSize: 15.0,
@@ -81,7 +82,7 @@ class DefaultFormField2 extends StatelessWidget {
           fillColor: ColorsManager.white,
           contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           disabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: ColorsManager.black),
+            borderSide: BorderSide(color: ColorsManager.grey),
           ),
           // enabledBorder: OutlineInputBorder(
           //    borderRadius: BorderRadius.circular(12),

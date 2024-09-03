@@ -111,4 +111,6 @@ static const  loading = 'Loading...';
   static const reason = 'reason';
   static const plzChooseSchool = 'Please choose school first';
   static const notEmpty = 'Must not be empty';
+  static const tooFar = 'the distance is too far please come closer';
+  static const someThingWentWrong = "Sorry, Something went wrong";
 }

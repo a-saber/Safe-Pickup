@@ -3,7 +3,9 @@ import 'package:call_son/core/core_widgets/default_button/default_button.dart';
 import 'package:call_son/core/core_widgets/defualt_drop_down/default_drop_down.dart';
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
 import 'package:call_son/core/localization/translation_key_manager.dart';
+import 'package:call_son/core/resources_manager/color_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
+import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/location.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_kid_data_cubit/get_kid_data_cubit.dart';
@@ -132,17 +134,32 @@ class _CallViewState extends State<CallView> {
                             child: CircularProgressIndicator(),
                           );
                         }
-                        return DefaultButton(
-                          onTap: () async
-                          {
-                              CallCubit.get(context).callUp(
-                                  kidId: kid!.id!,
-                                  schoolModel: school!
-                              );
+                        else
+                        {
+                          return Column(
+                            children:
+                            [
+                              if (state is CallError)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15.0),
+                              child: Text(state.error, style: StyleManager.medium.copyWith(
+                                  color: ColorsManager.red
+                              ) ,),
+                            ),
+                              DefaultButton(
+                                onTap: () async
+                                {
+                                  CallCubit.get(context).callUp(
+                                      kidId: kid!.id!,
+                                      schoolModel: school!
+                                  );
+                                },
+                                text: TranslationKeyManager.pickup.tr,
+                              )
 
-                          },
-                          text: TranslationKeyManager.pickup.tr,
-                        );
+                            ],
+                          );
+                        }
                       },
                     ),
                   ],

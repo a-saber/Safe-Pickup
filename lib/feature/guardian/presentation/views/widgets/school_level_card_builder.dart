@@ -57,7 +57,7 @@ class SchoolLevelCardBuilder extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${school.name} School',
+                              '${school.name}',
                               style: StyleManager.semiBold
                                   .copyWith(fontSize: 15.0),
                             ),
@@ -159,7 +159,7 @@ class SchoolCardBuilder extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${school.name} School',
+                          '${school.name}',
                           style: StyleManager.semiBold
                               .copyWith(fontSize: 15.0, color: ColorsManager.white),
                         ),

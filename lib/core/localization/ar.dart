@@ -88,5 +88,7 @@ Map<String, String> ar =
   TranslationKeyManager.cancel : 'الغاء',
   TranslationKeyManager.plzChooseSchool : 'الرجاء تحديد المدرسة اولا',
   TranslationKeyManager.notEmpty : 'لا يجب ترك هذا الحقل فارغا',
+  TranslationKeyManager.tooFar : 'المسافة بعيد عن المدرسة من فضلك اقترب اكثر',
+  TranslationKeyManager.someThingWentWrong : 'حدث خطأ ما، حاول مرة اخرى',
 
 };
