@@ -13,6 +13,9 @@ class SearchSchoolsCubit extends Cubit<SearchSchoolsState> {
 
   List<SchoolModel> schools = [];
 
+  void init() {
+    emit(SearchSchoolsInitial());
+  }
   void searchSchools({required String schoolName}) async {
     emit(SearchSchoolsLoading());
     var response = await parentRepoImp.searchSchools(schoolName: schoolName);

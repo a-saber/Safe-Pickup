@@ -182,9 +182,9 @@ class _RequestPricingDropDown2 extends State<KidsDropDown> {
           },
         ),
         onMenuStateChange: (isOpen) {
-          if (!isOpen) {
+          //if (!isOpen) {
             widget.textEditingController.clear();
-          }
+          //}
         },
       ),
     );

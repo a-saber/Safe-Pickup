@@ -104,7 +104,12 @@ class CustomDrawer extends StatelessWidget {
                           ),
                           IconButton(
                               splashColor: ColorsManager.white,
-                              onPressed: (){},
+                              onPressed: ()
+                              {
+                                Get.to(()=> const ParentProfileView(),
+                                    duration: const Duration(milliseconds: 500),
+                                    transition: DelayManager.rightToLeftWithFade);
+                              },
                               icon: const Icon(IconlyLight.edit_square, color: ColorsManager.white,)
                           )
                         ],
@@ -183,14 +188,14 @@ class CustomDrawer extends StatelessWidget {
 
                     }
                 ),
-                ListTile(
-                  leading: const Icon(IconlyLight.user_1),
-                  title:  Text(TranslationKeyManager.schools.tr),
-                  onTap: () {
-                    // Handle School tap
-                    Navigator.pop(context); // Close the drawer
-                  },
-                ),
+                // ListTile(
+                //   leading: const Icon(IconlyLight.user_1),
+                //   title:  Text(TranslationKeyManager.schools.tr),
+                //   onTap: () {
+                //     // Handle School tap
+                //     Navigator.pop(context); // Close the drawer
+                //   },
+                // ),
                 ListTile(
                   leading: const Icon(IconlyLight.setting),
                   title:  Text(TranslationKeyManager.settings.tr),

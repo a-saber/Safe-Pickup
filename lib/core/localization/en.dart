@@ -88,6 +88,7 @@ Map<String, String> en =
   TranslationKeyManager.notEmpty :  'This field cannot be empty',
   TranslationKeyManager.tooFar :  'the distance is too far please come closer',
   TranslationKeyManager.someThingWentWrong :  "Sorry, Something went wrong",
+  TranslationKeyManager.noSchoolFound :  'No School Found',
 
 
 };

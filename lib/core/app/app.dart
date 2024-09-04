@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
       [
         BlocProvider(create: (context)=>GetImageCubit()),
         BlocProvider(create: (context)=>SearchSchoolsCubit(getIt.get<GuardianRepoImplementation>())),
-        BlocProvider(create: (context)=>GetNearBySchoolsCubit(getIt.get<GuardianRepoImplementation>())..getNearBySchools(context, distanceInKm: 1)),
+        BlocProvider(create: (context)=>GetNearBySchoolsCubit(getIt.get<GuardianRepoImplementation>())..getNearBySchools(context, distanceInKm: 10000000)),
         BlocProvider(create: (context)=>GetLevelsCubit(getIt.get<GuardianRepoImplementation>())),
         BlocProvider(create: (context)=>GetAllSchoolsCubit(getIt.get<GuardianRepoImplementation>())),
         BlocProvider(create: (context)=>EditKidCubit(getIt.get<GuardianRepoImplementation>())),

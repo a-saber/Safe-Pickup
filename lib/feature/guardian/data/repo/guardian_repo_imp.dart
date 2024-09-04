@@ -34,6 +34,8 @@ class GuardianRepoImplementation extends GuardianRepo {
       'maxLon': lon + deltaLon,
     };
   }
+
+
   @override
   Future<Either<Failure, List<SchoolModel>>> getNearBySchools(context, {required double distanceInKm}) async
   {
@@ -44,7 +46,10 @@ class GuardianRepoImplementation extends GuardianRepo {
       // Calculate bounding box
       print(currentLocation!.longitude);
       print(currentLocation.latitude);
-      final boundingBox = calculateBoundingBox(lat: currentLocation!.latitude, lon: currentLocation.longitude, distanceInKm: distanceInKm);
+      final boundingBox = calculateBoundingBox(
+          lat: currentLocation.latitude,
+          lon: currentLocation.longitude, distanceInKm: distanceInKm
+      );
 
       // Query FireStore within the bounding box
       var schoolsQuery = await FirebaseFirestore.instance
@@ -124,7 +129,7 @@ class GuardianRepoImplementation extends GuardianRepo {
           });
       if (schools.isEmpty)
       {
-        return left(DataFailure('No Schools found'));
+        return left(DataFailure(TranslationKeyManager.noSchoolFound.tr));
       }
       else
       {

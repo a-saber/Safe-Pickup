@@ -133,7 +133,7 @@ class SchoolCardBuilder extends StatelessWidget {
           transition: DelayManager.rightToLeftWithFade,);
       },
       child: Card(
-        color: ColorsManager.secondary,
+        color: ColorsManager.white,
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -145,7 +145,8 @@ class SchoolCardBuilder extends StatelessWidget {
               Row(
                 children: [
                   Builder(builder: (context) {
-                    if (school.imagePath == null) {
+                    if (school.imagePath == null)
+                    {
                       return const IconImageViewer();
                     } else {
                       return CloudImageViewer(imagePath: school.imagePath!);
@@ -161,28 +162,29 @@ class SchoolCardBuilder extends StatelessWidget {
                         Text(
                           '${school.name}',
                           style: StyleManager.semiBold
-                              .copyWith(fontSize: 15.0, color: ColorsManager.white),
+                              .copyWith(fontSize: 15.0, ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              IconlyBold.location,
-                              size: 15,
-                              color: ColorsManager.white,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              school.location ?? '',
-                              style: StyleManager.bold.copyWith(
-                                  color: ColorsManager.white,
-                                  fontSize: 12.0),
-                            ),
-                          ],
+                        if(school.location != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                IconlyBold.location,
+                                size: 15,
+                                color: ColorsManager.grey,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                school.location ?? '',
+                                style: StyleManager.bold.copyWith(
+                                    color: ColorsManager.grey,
+                                    fontSize: 12.0),
+                              ),
+                            ],
+                          ),
                         ),
 
                       ],

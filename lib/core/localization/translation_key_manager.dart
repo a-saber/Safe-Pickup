@@ -113,4 +113,5 @@ static const  loading = 'Loading...';
   static const notEmpty = 'Must not be empty';
   static const tooFar = 'the distance is too far please come closer';
   static const someThingWentWrong = "Sorry, Something went wrong";
+  static const noSchoolFound = 'No Schools found';
 }

@@ -77,11 +77,11 @@ class SchoolSettingsView extends StatelessWidget {
             }
           },
         ),
-        SettingItemBuilder(
-          icon: IconlyLight.bag,
-          title: TranslationKeyManager.students.tr,
-          onTap: () {},
-        ),
+        // SettingItemBuilder(
+        //   icon: IconlyLight.bag,
+        //   title: TranslationKeyManager.students.tr,
+        //   onTap: () {},
+        // ),
         SettingItemBuilder(
           icon: IconlyLight.logout,
           title: TranslationKeyManager.logout.tr,

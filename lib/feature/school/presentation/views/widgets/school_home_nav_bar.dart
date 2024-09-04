@@ -19,7 +19,7 @@ class SchoolNavBar extends StatelessWidget {
         return SizedBox(
           height: 90,
           child: CrystalNavigationBar(
-            paddingR: const EdgeInsets.only(bottom: 5),
+            paddingR: const EdgeInsets.only(bottom: 5, right: 20, left: 20),
             currentIndex: cubit.currentIndex,
             unselectedItemColor: Colors.white70,
             backgroundColor: ColorsManager.primary,
@@ -41,11 +41,11 @@ class SchoolNavBar extends StatelessWidget {
               ),
 
               // Parents Requests
-              CrystalNavigationBarItem(
-                icon: IconlyBold.user_2,
-                unselectedIcon: IconlyLight.user,
-                selectedColor: selectedItemColor,
-              ),
+              // CrystalNavigationBarItem(
+              //   icon: IconlyBold.user_2,
+              //   unselectedIcon: IconlyLight.user,
+              //   selectedColor: selectedItemColor,
+              // ),
 
               // Settings
               CrystalNavigationBarItem(

@@ -73,6 +73,10 @@ class DefaultFormField extends StatelessWidget {
         ),
           errorStyle: StyleManager.regular.copyWith(
               color: ColorsManager.red),
+          disabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: ColorsManager.grey),
+            borderRadius: BorderRadius.circular(12),
+          ),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: ColorsManager.grey),
             borderRadius: BorderRadius.circular(12),

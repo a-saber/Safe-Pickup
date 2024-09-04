@@ -5,10 +5,16 @@ import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
+import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
+import 'package:call_son/feature/guardian/presentation/cubit/get_levels/get_levels_cubit.dart';
+import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+
+import 'parent_join_school_view.dart';
 
 
 class ParentSchoolProfileView extends StatelessWidget {
@@ -28,7 +34,20 @@ class ParentSchoolProfileView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: DefaultButton(
-                  onTap: (){},
+                  onTap: ()
+                  {
+                    if(GetAllParentKidsCubit.get(context).kids.isEmpty)
+                    {
+                      GetAllParentKidsCubit.get(context).getAllParentKids(
+                        superParentId: GetParentCubit.get(context).parentModel!.superParentId!
+                      );
+                    }
+                    GetLevelsCubit.get(context).getLevels(schoolId: school.id!);
+                    Get.to(() => ParentJoinSchoolView(school: school,),
+                      duration: const Duration(milliseconds: 500),
+                      transition: DelayManager.rightToLeftWithFade,
+                    );
+                  },
                   text: TranslationKeyManager.joinRequest.tr),
             )
           ],

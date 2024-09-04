@@ -11,11 +11,20 @@ import 'package:iconly/iconly.dart';
 
 import 'widgets/school_level_card_builder.dart';
 
-class ParentSearchForSchoolView extends StatelessWidget {
-  ParentSearchForSchoolView({super.key});
+class ParentSearchForSchoolView extends StatefulWidget {
+  const ParentSearchForSchoolView({super.key});
 
+  @override
+  State<ParentSearchForSchoolView> createState() => _ParentSearchForSchoolViewState();
+}
+
+class _ParentSearchForSchoolViewState extends State<ParentSearchForSchoolView> {
   final searchController = TextEditingController();
-
+@override
+  void initState() {
+    SearchSchoolsCubit.get(context).init();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
