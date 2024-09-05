@@ -26,41 +26,60 @@ class _GuardianHistoryViewState extends State<GuardianHistoryView> {
     return Scaffold(
       appBar: CustomAppBar(title: TranslationKeyManager.history.tr, showPopup: true,),
       body: SafeArea(
-        child: Column(
-          children:
-          [
-            MyTabBarView(
-              length: 3,
-              onTab: (index)
-              {
-                if (index == 0)
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children:
+            [
+              MyTabBarView(
+                length: 3,
+                onTab: (index)
                 {
-                  callStatus = CallStatus.waiting;
-                }
-                else if(index == 1)
+                  if (index == 0)
+                  {
+                    callStatus = CallStatus.waiting;
+                  }
+                  else if(index == 1)
+                  {
+                    callStatus = CallStatus.accepted;
+                  }
+                  else
+                  {
+                    callStatus = CallStatus.rejected;
+                  }
+                  setState(() {});
+                },
+                tabs: [
+                  TabBarItem(
+                      selected: callStatus == CallStatus.waiting,
+                      label: TranslationKeyManager.waiting.tr.toUpperCase()),
+                  TabBarItem(
+                      selected: callStatus == CallStatus.accepted,
+                      label: TranslationKeyManager.accepted.tr.toUpperCase()),
+                  TabBarItem(
+                      selected: callStatus == CallStatus.rejected,
+                      label: TranslationKeyManager.rejected.tr.toUpperCase()),
+                ],
+              ),
+              const SizedBox(height: 20,),
+              Builder(
+                builder: (context)
                 {
-                  callStatus = CallStatus.accepted;
-                }
-                else
-                {
-                  callStatus = CallStatus.rejected;
-                }
-                setState(() {});
-              },
-              tabs: [
-                TabBarItem(
-                    selected: callStatus == CallStatus.waiting,
-                    label: TranslationKeyManager.waiting.tr.toUpperCase()),
-                TabBarItem(
-                    selected: callStatus == CallStatus.accepted,
-                    label: TranslationKeyManager.accepted.tr.toUpperCase()),
-                TabBarItem(
-                    selected: callStatus == CallStatus.rejected,
-                    label: TranslationKeyManager.rejected.tr.toUpperCase()),
-              ],
-            ),
-            HistoryViewBody(callStatus: callStatus,)
-          ],
+                  if (callStatus == CallStatus.waiting)
+                  {
+                    return CallsViewBodyWaiting();
+                  }
+                  else if (callStatus == CallStatus.accepted)
+                  {
+                    return CallsViewBodyAccepted();
+                  }
+                  else
+                  {
+                    return CallsViewBodyRejected();
+                  }
+                }),
+            ],
+          ),
         ),
       ),
     );

@@ -36,17 +36,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
-  firebase_core: ^3.2.0
+  firebase_core:
   dartz: ^0.10.1
   get_it: ^7.7.0
   get: ^4.6.6
   cached_network_image: ^3.3.1
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
-  firebase_auth: ^5.1.2
-  firebase_storage: ^12.1.1
-  firebase_messaging: ^15.0.3
-  cloud_firestore: ^5.1.0
+  firebase_auth:
+  firebase_storage:
+  cloud_firestore:
   google_maps_flutter: ^2.7.0
   geolocator: ^12.0.0
   awesome_dialog: ^3.2.1
@@ -61,6 +60,7 @@ dependencies:
   font_awesome_flutter:
   shared_preferences:
   flutter_local_notifications:
+  flutterflow_paginate_firestore:
 
 dev_dependencies:
   flutter_test:

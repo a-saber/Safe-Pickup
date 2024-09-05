@@ -81,7 +81,21 @@ class _SchoolCallsViewState extends State<SchoolCallsView> {
         Builder(
           builder: (BuildContext context)
           {
-            return SchoolCallsViewBody(callStatus: callStatus,);
+            print('object');
+            print(callStatus);
+           // return SchoolCallsViewBody(callStatusNo: 1, callStatus: callStatus,);
+            if(callStatus == CallStatus.waiting)
+            {
+              return SchoolCallsViewBodyWaiting();
+            }
+            else if(callStatus == CallStatus.accepted)
+            {
+              return SchoolCallsViewBodyAccepted();
+            }
+            else
+            {
+              return SchoolCallsViewBodyRejected();
+            }
           },
         ),
 

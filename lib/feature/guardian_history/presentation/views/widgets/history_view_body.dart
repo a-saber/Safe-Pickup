@@ -10,117 +10,381 @@ import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-
-class HistoryViewBody extends StatelessWidget {
-  const HistoryViewBody({super.key, required this.callStatus,});
-  final CallStatus callStatus;
+class CallsViewBodyWaiting extends StatelessWidget {
+  const CallsViewBodyWaiting({super.key,});
 
   @override
   Widget build(BuildContext context) {
-    Stream<QuerySnapshot> stream =
-      FirebaseFirestore.instance
-          .collection(CollectionManager.callCollection)
-          .where('parentId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('status',
-          isEqualTo: callStatus==CallStatus.waiting ?2 :
-          callStatus==CallStatus.accepted?1:0)
-          .orderBy('createdAt', descending: true).snapshots();
+    return Expanded(
+      child: PaginateFirestore(
+          itemsPerPage: 10,
+          initialLoader: CircularProgressIndicator(),
+          onEmpty: Text(TranslationKeyManager.noData.tr),
+          onError: (e){return Text(TranslationKeyManager.someThingWentWrong.tr);},
+          itemBuilder: (context, callSnapshot, index)
+          {
+            CallModel callModel = CallModel.fromJson(callSnapshot[index].data()as Map<String, dynamic>);
+            return FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance.collection(CollectionManager.kidsCollection)
+                  .doc(callModel.kidId).get(),
+              builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
+                if (kidSnapshot.hasError) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: stream,
-      builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> callSnapshot)
-      {
-        if (callSnapshot.hasError) {
-          return Text(callSnapshot.error.toString());
-        }
-        if (callSnapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-        if(callSnapshot.data!.docs.isEmpty)
-        {
-          return Center(child: Text(TranslationKeyManager.noData.tr),);
-        }
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ListView.builder(
-              itemCount: callSnapshot.data!.docs.length,
-              itemBuilder: (context, index)
-              {
-                CallModel callModel = CallModel.fromJson(callSnapshot.data!.docs[index].data()as Map<String, dynamic>);
-                return FutureBuilder<DocumentSnapshot>(
-                  future: FirebaseFirestore.instance.collection(CollectionManager.kidsCollection)
-                      .doc(callModel.kidId).get(),
-                  builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
-                    if (kidSnapshot.hasError) {
-                      return Text(TranslationKeyManager.someThingWentWrong.tr);
-                    }
+                if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
 
-                    if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
-                      return Text(TranslationKeyManager.someThingWentWrong.tr);
-                    }
+                if (kidSnapshot.connectionState == ConnectionState.done) {
+                  callModel.kidModel = KidModel.fromJson(kidSnapshot.data!.data() as Map<String, dynamic>);
+                  return FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                        .doc(callModel.schoolId).get(),
+                    builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
 
-                    if (kidSnapshot.connectionState == ConnectionState.done) {
-                      callModel.kidModel = KidModel.fromJson(kidSnapshot.data!.data() as Map<String, dynamic>);
-                      return FutureBuilder<DocumentSnapshot>(
-                        future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
-                            .doc(callModel.schoolId).get(),
-                        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
+                      if (schoolSnapshot.hasError) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
 
-                          if (schoolSnapshot.hasError) {
-                            return Text(TranslationKeyManager.someThingWentWrong.tr);
-                          }
+                      if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
 
-                          if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
-                            return Text(TranslationKeyManager.someThingWentWrong.tr);
-                          }
+                      if (schoolSnapshot.connectionState == ConnectionState.done) {
+                        callModel.schoolModel = SchoolModel.fromJson(schoolSnapshot.data!.data() as Map<String, dynamic>);
+                        return FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                              .doc(callModel.schoolId).collection(CollectionManager.levelsCollection)
+                              .doc(callModel.levelId).get(),
+                          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
-                          if (schoolSnapshot.connectionState == ConnectionState.done) {
-                            callModel.schoolModel = SchoolModel.fromJson(schoolSnapshot.data!.data() as Map<String, dynamic>);
-                            return FutureBuilder<DocumentSnapshot>(
-                              future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
-                                  .doc(callModel.schoolId).collection(CollectionManager.levelsCollection)
-                                  .doc(callModel.levelId).get(),
-                              builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
 
-                                if (snapshot.hasError) {
-                                  return Text(TranslationKeyManager.someThingWentWrong.tr);
-                                }
+                            if (snapshot.hasData && !snapshot.data!.exists) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
 
-                                if (snapshot.hasData && !snapshot.data!.exists) {
-                                  return Text(TranslationKeyManager.someThingWentWrong.tr);
-                                }
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              callModel.schoolModel!.kidLevelModel = LevelModel.fromJson(snapshot.data!.data() as Map<String, dynamic>);
+                              return CallCardBuilder(callStatus: CallStatus.waiting, call: callModel);
+                            }
 
-                                if (snapshot.connectionState == ConnectionState.done) {
-                                  callModel.schoolModel!.kidLevelModel = LevelModel.fromJson(snapshot.data!.data() as Map<String, dynamic>);
-                                  return CallCardBuilder(callStatus: callStatus, call: callModel);
-                                }
+                            return SizedBox();
+                          },
+                        );
+                      }
 
-                                return Text(TranslationKeyManager.loading.tr);
-                              },
-                            );
-                          }
+                      return SizedBox();
+                    },
+                  );
+                }
 
-                          return Text(TranslationKeyManager.loading.tr);
-                        },
-                      );
-                    }
-
-                    return Text(TranslationKeyManager.loading.tr);
-                  },
-                );
-              })
-            ,
-          ),
-        );
-
-      },
+                return SizedBox();
+              },
+            );
+          },
+          isLive: true,
+          query: FirebaseFirestore.instance
+              .collection(CollectionManager.callCollection)
+              .where('parentId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+              .where('status', isEqualTo: 2)
+              .orderBy('createdAt', descending: true),
+          itemBuilderType: PaginateBuilderType.listView
+      ),
     );
   }
 }
+
+class CallsViewBodyAccepted extends StatelessWidget {
+  const CallsViewBodyAccepted({super.key,});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: PaginateFirestore(
+          itemsPerPage: 10,
+          initialLoader: CircularProgressIndicator(),
+          onEmpty: Text(TranslationKeyManager.noData.tr),
+          onError: (e){return Text(TranslationKeyManager.someThingWentWrong.tr);},
+          itemBuilder: (context, callSnapshot, index)
+          {
+            CallModel callModel = CallModel.fromJson(callSnapshot[index].data()as Map<String, dynamic>);
+            return FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance.collection(CollectionManager.kidsCollection)
+                  .doc(callModel.kidId).get(),
+              builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
+                if (kidSnapshot.hasError) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
+
+                if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
+
+                if (kidSnapshot.connectionState == ConnectionState.done) {
+                  callModel.kidModel = KidModel.fromJson(kidSnapshot.data!.data() as Map<String, dynamic>);
+                  return FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                        .doc(callModel.schoolId).get(),
+                    builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
+
+                      if (schoolSnapshot.hasError) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
+
+                      if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
+
+                      if (schoolSnapshot.connectionState == ConnectionState.done) {
+                        callModel.schoolModel = SchoolModel.fromJson(schoolSnapshot.data!.data() as Map<String, dynamic>);
+                        return FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                              .doc(callModel.schoolId).collection(CollectionManager.levelsCollection)
+                              .doc(callModel.levelId).get(),
+                          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
+                            if (snapshot.hasError) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
+
+                            if (snapshot.hasData && !snapshot.data!.exists) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
+
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              callModel.schoolModel!.kidLevelModel = LevelModel.fromJson(snapshot.data!.data() as Map<String, dynamic>);
+                              return CallCardBuilder(callStatus: CallStatus.accepted, call: callModel);
+                            }
+
+                            return SizedBox();
+                          },
+                        );
+                      }
+
+                      return SizedBox();
+                    },
+                  );
+                }
+
+                return SizedBox();
+              },
+            );
+          },
+          isLive: true,
+          query: FirebaseFirestore.instance
+              .collection(CollectionManager.callCollection)
+              .where('parentId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+              .where('status', isEqualTo: 1)
+              .orderBy('createdAt', descending: true),
+          itemBuilderType: PaginateBuilderType.listView
+      ),
+    );
+  }
+}
+
+class CallsViewBodyRejected extends StatelessWidget {
+  const CallsViewBodyRejected({super.key,});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: PaginateFirestore(
+          itemsPerPage: 10,
+          initialLoader: CircularProgressIndicator(),
+          onEmpty: Text(TranslationKeyManager.noData.tr),
+          onError: (e){return Text(TranslationKeyManager.someThingWentWrong.tr);},
+          itemBuilder: (context, callSnapshot, index)
+          {
+            CallModel callModel = CallModel.fromJson(callSnapshot[index].data()as Map<String, dynamic>);
+            return FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance.collection(CollectionManager.kidsCollection)
+                  .doc(callModel.kidId).get(),
+              builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
+                if (kidSnapshot.hasError) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
+
+                if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
+                  return Text(TranslationKeyManager.someThingWentWrong.tr);
+                }
+
+                if (kidSnapshot.connectionState == ConnectionState.done) {
+                  callModel.kidModel = KidModel.fromJson(kidSnapshot.data!.data() as Map<String, dynamic>);
+                  return FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                        .doc(callModel.schoolId).get(),
+                    builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
+
+                      if (schoolSnapshot.hasError) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
+
+                      if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
+                        return Text(TranslationKeyManager.someThingWentWrong.tr);
+                      }
+
+                      if (schoolSnapshot.connectionState == ConnectionState.done) {
+                        callModel.schoolModel = SchoolModel.fromJson(schoolSnapshot.data!.data() as Map<String, dynamic>);
+                        return FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                              .doc(callModel.schoolId).collection(CollectionManager.levelsCollection)
+                              .doc(callModel.levelId).get(),
+                          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
+                            if (snapshot.hasError) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
+
+                            if (snapshot.hasData && !snapshot.data!.exists) {
+                              return Text(TranslationKeyManager.someThingWentWrong.tr);
+                            }
+
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              callModel.schoolModel!.kidLevelModel = LevelModel.fromJson(snapshot.data!.data() as Map<String, dynamic>);
+                              return CallCardBuilder(callStatus: CallStatus.rejected, call: callModel);
+                            }
+
+                            return SizedBox();
+                          },
+                        );
+                      }
+
+                      return SizedBox();
+                    },
+                  );
+                }
+
+                return SizedBox();
+              },
+            );
+          },
+          isLive: true,
+          query: FirebaseFirestore.instance
+              .collection(CollectionManager.callCollection)
+              .where('parentId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+              .where('status', isEqualTo: 0)
+              .orderBy('createdAt', descending: true),
+          itemBuilderType: PaginateBuilderType.listView
+      ),
+    );
+  }
+}
+
+// class HistoryViewBody extends StatelessWidget {
+//   const HistoryViewBody({super.key, required this.callStatus,});
+//   final CallStatus callStatus;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     Stream<QuerySnapshot> stream =
+//       FirebaseFirestore.instance
+//           .collection(CollectionManager.callCollection)
+//           .where('parentId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+//       .where('status',
+//           isEqualTo: callStatus==CallStatus.waiting ?2 :
+//           callStatus==CallStatus.accepted?1:0)
+//           .orderBy('createdAt', descending: true).snapshots();
+//
+//     return StreamBuilder<QuerySnapshot>(
+//       stream: stream,
+//       builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> callSnapshot)
+//       {
+//         if (callSnapshot.hasError) {
+//           return Text(callSnapshot.error.toString());
+//         }
+//         if (callSnapshot.connectionState == ConnectionState.waiting) {
+//           return const CircularProgressIndicator();
+//         }
+//         if(callSnapshot.data!.docs.isEmpty)
+//         {
+//           return Center(child: Text(TranslationKeyManager.noData.tr),);
+//         }
+//         return Expanded(
+//           child: Padding(
+//             padding: const EdgeInsets.all(20.0),
+//             child: ListView.builder(
+//               itemCount: callSnapshot.data!.docs.length,
+//               itemBuilder: (context, index)
+//               {
+//                 CallModel callModel = CallModel.fromJson(callSnapshot.data!.docs[index].data()as Map<String, dynamic>);
+//                 return FutureBuilder<DocumentSnapshot>(
+//                   future: FirebaseFirestore.instance.collection(CollectionManager.kidsCollection)
+//                       .doc(callModel.kidId).get(),
+//                   builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
+//                     if (kidSnapshot.hasError) {
+//                       return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                     }
+//
+//                     if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
+//                       return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                     }
+//
+//                     if (kidSnapshot.connectionState == ConnectionState.done) {
+//                       callModel.kidModel = KidModel.fromJson(kidSnapshot.data!.data() as Map<String, dynamic>);
+//                       return FutureBuilder<DocumentSnapshot>(
+//                         future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+//                             .doc(callModel.schoolId).get(),
+//                         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> schoolSnapshot) {
+//
+//                           if (schoolSnapshot.hasError) {
+//                             return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                           }
+//
+//                           if (schoolSnapshot.hasData && !schoolSnapshot.data!.exists) {
+//                             return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                           }
+//
+//                           if (schoolSnapshot.connectionState == ConnectionState.done) {
+//                             callModel.schoolModel = SchoolModel.fromJson(schoolSnapshot.data!.data() as Map<String, dynamic>);
+//                             return FutureBuilder<DocumentSnapshot>(
+//                               future: FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+//                                   .doc(callModel.schoolId).collection(CollectionManager.levelsCollection)
+//                                   .doc(callModel.levelId).get(),
+//                               builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+//
+//                                 if (snapshot.hasError) {
+//                                   return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                                 }
+//
+//                                 if (snapshot.hasData && !snapshot.data!.exists) {
+//                                   return Text(TranslationKeyManager.someThingWentWrong.tr);
+//                                 }
+//
+//                                 if (snapshot.connectionState == ConnectionState.done) {
+//                                   callModel.schoolModel!.kidLevelModel = LevelModel.fromJson(snapshot.data!.data() as Map<String, dynamic>);
+//                                   return CallCardBuilder(callStatus: callStatus, call: callModel);
+//                                 }
+//
+//                                 return Text(TranslationKeyManager.loading.tr);
+//                               },
+//                             );
+//                           }
+//
+//                           return Text(TranslationKeyManager.loading.tr);
+//                         },
+//                       );
+//                     }
+//
+//                     return Text(TranslationKeyManager.loading.tr);
+//                   },
+//                 );
+//               })
+//             ,
+//           ),
+//         );
+//
+//       },
+//     );
+//   }
+// }
 
 class CallCardBuilder extends StatelessWidget {
   const CallCardBuilder({super.key, required this.callStatus, required this.call});
