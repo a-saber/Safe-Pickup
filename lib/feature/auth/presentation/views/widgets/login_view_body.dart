@@ -9,11 +9,11 @@ import 'package:call_son/core/resources_manager/padding_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/views/parents_home_view.dart';
-import 'package:call_son/feature/school/presentation/views/school_home_layout.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/login/login_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/login/login_state.dart';
 import 'package:call_son/feature/auth/presentation/views/forget_pass_view.dart';
+import 'package:call_son/feature/school/presentation/views/school_home_view.dart';
 import 'package:call_son/feature/welcome/presentation/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -115,7 +115,7 @@ class _SchoolLoginViewBodyState extends State<SchoolLoginViewBody> {
                       if (state.loginResponse.isSchool) {
                         GetSchoolCubit.get(context)
                             .assignSchool(json: state.loginResponse.json);
-                        Get.off(() => const SchoolHomeLayout(),
+                        Get.off(() => const SchoolHomeView(),
                             duration: const Duration(milliseconds: 500),
                             transition: DelayManager.rightToLeftWithFade);
                       } else {

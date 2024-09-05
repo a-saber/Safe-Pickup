@@ -22,78 +22,83 @@ class SchoolSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:
-      [
-        SettingItemBuilder(
-          icon: IconlyLight.profile,
-          title: TranslationKeyManager.profile.tr,
-          onTap: () {
-            Get.to(() => const SchoolProfileView(),
-                duration: const Duration(milliseconds: 500),
-                transition: DelayManager.rightToLeftWithFade);
-          },
-        ),
-        SettingItemBuilder(
-          icon: IconlyLight.category,
-          title: TranslationKeyManager.levels.tr,
-          onTap: () {
-            GetSchoolLevelsCubit.get(context).getLevels();
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children:
+          [
+            SettingItemBuilder(
+              icon: IconlyLight.profile,
+              title: TranslationKeyManager.profile.tr,
+              onTap: () {
+                Get.to(() => const SchoolProfileView(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: DelayManager.rightToLeftWithFade);
+              },
+            ),
+            SettingItemBuilder(
+              icon: IconlyLight.category,
+              title: TranslationKeyManager.levels.tr,
+              onTap: () {
+                GetSchoolLevelsCubit.get(context).getLevels();
 
-            Get.to(() => const SchoolEditLevels(),
-                duration: const Duration(milliseconds: 500),
-                transition: DelayManager.rightToLeftWithFade);
-          },
-        ),
-        SettingItemBuilder(
-          icon: IconlyLight.location,
-          title: TranslationKeyManager.location.tr,
-          onTap: ()
-          {
-            LocationCubit.get(context).setLocationToCustom(
-                latLng: LatLng(GetSchoolCubit.get(context).schoolModel!.lat!,
-                  GetSchoolCubit.get(context).schoolModel!.long!,));
-            Get.to(() => const SchoolLocationView(),
-                duration: const Duration(milliseconds: 500),
-                transition: DelayManager.rightToLeftWithFade);
-          },
-        ),
-        SettingItemBuilder(
-          icon: IconlyLight.swap,
-          title: TranslationKeyManager.languages.tr,
-          onTap: () async {
-            if (CacheData.lang == CacheHelperKeys.keyEN) {
-              await CacheHelper.saveData(
-                  key: CacheHelperKeys.langKey,
-                  value: CacheHelperKeys.keyAR);
-              Get.updateLocale(TranslationKeyManager.localeAR);
-              CacheData.lang = CacheHelperKeys.keyAR;
-            } else {
-              await CacheHelper.saveData(
-                  key: CacheHelperKeys.langKey,
-                  value: CacheHelperKeys.keyEN);
-              Get.updateLocale(TranslationKeyManager.localeEN);
-              CacheData.lang = CacheHelperKeys.keyEN;
-            }
-          },
-        ),
-        // SettingItemBuilder(
-        //   icon: IconlyLight.bag,
-        //   title: TranslationKeyManager.students.tr,
-        //   onTap: () {},
-        // ),
-        SettingItemBuilder(
-          icon: IconlyLight.logout,
-          title: TranslationKeyManager.logout.tr,
-          onTap: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext ctx) => alertLogout(context),
-                barrierDismissible: false);
-          },
-        ),
+                Get.to(() => const SchoolEditLevels(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: DelayManager.rightToLeftWithFade);
+              },
+            ),
+            SettingItemBuilder(
+              icon: IconlyLight.location,
+              title: TranslationKeyManager.location.tr,
+              onTap: ()
+              {
+                LocationCubit.get(context).setLocationToCustom(
+                    latLng: LatLng(GetSchoolCubit.get(context).schoolModel!.lat!,
+                      GetSchoolCubit.get(context).schoolModel!.long!,));
+                Get.to(() => const SchoolLocationView(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: DelayManager.rightToLeftWithFade);
+              },
+            ),
+            SettingItemBuilder(
+              icon: IconlyLight.swap,
+              title: TranslationKeyManager.languages.tr,
+              onTap: () async {
+                if (CacheData.lang == CacheHelperKeys.keyEN) {
+                  await CacheHelper.saveData(
+                      key: CacheHelperKeys.langKey,
+                      value: CacheHelperKeys.keyAR);
+                  Get.updateLocale(TranslationKeyManager.localeAR);
+                  CacheData.lang = CacheHelperKeys.keyAR;
+                } else {
+                  await CacheHelper.saveData(
+                      key: CacheHelperKeys.langKey,
+                      value: CacheHelperKeys.keyEN);
+                  Get.updateLocale(TranslationKeyManager.localeEN);
+                  CacheData.lang = CacheHelperKeys.keyEN;
+                }
+              },
+            ),
+            // SettingItemBuilder(
+            //   icon: IconlyLight.bag,
+            //   title: TranslationKeyManager.students.tr,
+            //   onTap: () {},
+            // ),
+            SettingItemBuilder(
+              icon: IconlyLight.logout,
+              title: TranslationKeyManager.logout.tr,
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) => alertLogout(context),
+                    barrierDismissible: false);
+              },
+            ),
 
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:call_son/core/core_widgets/custom_app_bar.dart';
-import 'package:call_son/core/models/call_model.dart';
+import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/core/models/school_model.dart';
@@ -9,6 +9,7 @@ import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class ResultView extends StatelessWidget {
@@ -20,7 +21,7 @@ class ResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Wait For Response', showPopup: true,),
+      appBar: CustomAppBar(title: TranslationKeyManager.waitForResponse.tr, showPopup: true,),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder<DocumentSnapshot> (
@@ -61,7 +62,7 @@ class ResultView extends StatelessWidget {
                                 const Icon(IconlyLight.calling,),
                                 const SizedBox(width: 15,),
                                 Expanded(
-                                  child: Text('Waiting for school response for your kid call request ${kid.name}',
+                                  child: Text('${TranslationKeyManager.waitingForSchResForUKidReq.tr} ${kid.name}',
                                     style: StyleManager.regular.copyWith(
                                         fontSize: 17,
                                     ),),
@@ -87,7 +88,7 @@ class ResultView extends StatelessWidget {
                                 const Icon(Icons.check_circle_outline, color: ColorsManager.white,),
                                 const SizedBox(width: 15,),
                                 Expanded(
-                                  child: Text('School accepted your kid call request ${kid.name}',
+                                  child: Text('${TranslationKeyManager.schoolAcceptedUKidReq.tr} ${kid.name}',
                                     style: StyleManager.regular.copyWith(
                                         fontSize: 17,
                                       color: ColorsManager.white
@@ -122,13 +123,13 @@ class ResultView extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('School rejected your kid call request ${kid.name}',
+                                          Text('${TranslationKeyManager.schoolRejectedUKidReq.tr} ${kid.name}',
                                             style: StyleManager.regular.copyWith(
                                               fontSize: 17,
                                               color: ColorsManager.white
                                             ),),
                                           const SizedBox(height: 10,),
-                                          Text('School Reply: ${snapshot.data!['rejectReason']}',
+                                          Text('${TranslationKeyManager.schoolReply.tr} ${snapshot.data!['rejectReason']}',
                                               style: StyleManager.regular.copyWith(
                                                   fontSize: 17,
                                                   color: ColorsManager.white
@@ -199,7 +200,7 @@ class ResponseSchoolLevelCardBuilder extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${school.name} School',
+                        '${school.name}',
                         style: StyleManager.semiBold
                             .copyWith(fontSize: 15.0),
                       ),

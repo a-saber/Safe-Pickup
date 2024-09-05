@@ -89,6 +89,11 @@ Map<String, String> en =
   TranslationKeyManager.tooFar :  'the distance is too far please come closer',
   TranslationKeyManager.someThingWentWrong :  "Sorry, Something went wrong",
   TranslationKeyManager.noSchoolFound :  'No School Found',
+  TranslationKeyManager.waitForResponse : 'Wait For Response',
+  TranslationKeyManager.waitingForSchResForUKidReq : 'Waiting For School Response For your Kid Request',
+  TranslationKeyManager.schoolAcceptedUKidReq : 'School Accepted Your Kid Request',
+  TranslationKeyManager.schoolRejectedUKidReq : 'School Rejected Your Kid Request',
+  TranslationKeyManager.schoolReply : 'School Reply',
 
 
 };

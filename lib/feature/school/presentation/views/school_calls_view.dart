@@ -21,36 +21,63 @@ class _SchoolCallsViewState extends State<SchoolCallsView> {
     return Column(
       children:
       [
-        MyTabBarView(
-          length: 3,
-          onTab: (index)
-          {
-            if (index == 0)
-            {
-              callStatus = CallStatus.waiting;
-            }
-            else if(index == 1)
-            {
-              callStatus = CallStatus.accepted;
-            }
-            else
-            {
-              callStatus = CallStatus.rejected;
-            }
-            setState(() {});
-          },
-          tabs: [
-            TabBarItem(
-                selected: callStatus == CallStatus.waiting,
-                label: TranslationKeyManager.waiting.tr),
-            TabBarItem(
-                selected: callStatus == CallStatus.accepted,
-                label: TranslationKeyManager.accepted.tr),
-            TabBarItem(
-                selected: callStatus == CallStatus.rejected,
-                label: TranslationKeyManager.rejected.tr),
+        Row(
+          children:
+          [
+            TabBarItemWithBackground(
+              selected: callStatus == CallStatus.waiting,
+              label: TranslationKeyManager.waiting.tr,
+              onTap: () {
+                callStatus = CallStatus.waiting;
+                setState(() {});
+              },
+            ),
+            TabBarItemWithBackground(
+              selected: callStatus == CallStatus.accepted,
+              label: TranslationKeyManager.accepted.tr,
+              onTap: () {
+                callStatus = CallStatus.accepted;
+                setState(() {});
+              },),
+            TabBarItemWithBackground(
+              selected: callStatus == CallStatus.rejected,
+              label: TranslationKeyManager.rejected.tr,
+              onTap: () {
+                callStatus = CallStatus.rejected;
+                setState(() {});
+              },),
           ],
         ),
+        // MyTabBarView(
+        //   length: 3,
+        //   onTab: (index)
+        //   {
+        //     if (index == 0)
+        //     {
+        //       callStatus = CallStatus.waiting;
+        //     }
+        //     else if(index == 1)
+        //     {
+        //       callStatus = CallStatus.accepted;
+        //     }
+        //     else
+        //     {
+        //       callStatus = CallStatus.rejected;
+        //     }
+        //     setState(() {});
+        //   },
+        //   tabs: [
+        //     TabBarItem(
+        //         selected: callStatus == CallStatus.waiting,
+        //         label: TranslationKeyManager.waiting.tr),
+        //     TabBarItem(
+        //         selected: callStatus == CallStatus.accepted,
+        //         label: TranslationKeyManager.accepted.tr),
+        //     TabBarItem(
+        //         selected: callStatus == CallStatus.rejected,
+        //         label: TranslationKeyManager.rejected.tr),
+        //   ],
+        // ),
         Builder(
           builder: (BuildContext context)
           {

@@ -56,3 +56,37 @@ class TabBarItem extends StatelessWidget {
     );
   }
 }
+
+
+
+class TabBarItemWithBackground extends StatelessWidget {
+  const TabBarItemWithBackground({Key? key, required this.label, this.selected = true, required this.onTap}) : super(key: key);
+
+  final bool selected;
+  final String label;
+  final void Function()? onTap;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          margin:   const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+          decoration: BoxDecoration(
+            color: selected? ColorsManager.primary: ColorsManager.white,
+            borderRadius: BorderRadius.circular(10),
+            border: selected? null: Border.all(color: ColorsManager.primary),
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: StyleManager.semiBold.copyWith(
+                color: selected? ColorsManager.white: ColorsManager.primary
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

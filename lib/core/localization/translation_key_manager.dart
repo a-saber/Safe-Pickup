@@ -114,4 +114,9 @@ static const  loading = 'Loading...';
   static const tooFar = 'the distance is too far please come closer';
   static const someThingWentWrong = "Sorry, Something went wrong";
   static const noSchoolFound = 'No Schools found';
+  static const waitForResponse = 'Wait For Response';
+  static const waitingForSchResForUKidReq = 'Waiting for school response for your kid call request';
+  static const schoolAcceptedUKidReq = 'School accepted your kid call request';
+  static const schoolRejectedUKidReq = 'School rejected your kid call request';
+  static const schoolReply = 'School Reply: ';
 }

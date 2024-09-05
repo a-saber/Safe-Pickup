@@ -70,11 +70,11 @@ class SchoolCallsViewBody extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> parentSnapshot) {
           
                   if (parentSnapshot.hasError) {
-                    return Text("Something went wrong");
+                    return Text(TranslationKeyManager.someThingWentWrong.tr);
                   }
           
                   if (parentSnapshot.hasData && !parentSnapshot.data!.exists) {
-                    return Text("Document does not exist");
+                    return Text(TranslationKeyManager.someThingWentWrong.tr);
                   }
           
                   if (parentSnapshot.connectionState == ConnectionState.done) {
@@ -85,11 +85,11 @@ class SchoolCallsViewBody extends StatelessWidget {
                       builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> kidSnapshot) {
           
                         if (kidSnapshot.hasError) {
-                          return Text("Something went wrong");
+                          return Text(TranslationKeyManager.someThingWentWrong.tr);
                         }
           
                         if (kidSnapshot.hasData && !kidSnapshot.data!.exists) {
-                          return Text("Document does not exist");
+                          return Text(TranslationKeyManager.someThingWentWrong.tr);
                         }
           
                         if (kidSnapshot.connectionState == ConnectionState.done) {
@@ -101,11 +101,11 @@ class SchoolCallsViewBody extends StatelessWidget {
                             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> levelSnapshot) {
                               print(callModel.levelId);
                               if (levelSnapshot.hasError) {
-                                return Text("Something went wrong");
+                                return Text(TranslationKeyManager.someThingWentWrong.tr);
                               }
           
                               if (levelSnapshot.hasData && !levelSnapshot.data!.exists) {
-                                return Text("Document does not exist");
+                                return Text(TranslationKeyManager.someThingWentWrong.tr);
                               }
           
                               if (levelSnapshot.connectionState == ConnectionState.done) {
@@ -217,7 +217,7 @@ class SchoolCallCardBuilder extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      call.createdAt!.toDate().toString().substring(0, 16) ?? '',
+                      call.createdAt!.toDate().toString().substring(0, 16),
                       style: StyleManager.semiBold.copyWith(
                           color: ColorsManager.grey,
                           fontSize: 12.0),
@@ -251,7 +251,7 @@ class SchoolCallCardBuilder extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              call.editedAt!.toDate().toString().substring(0, 16) ?? '',
+                              call.editedAt!.toDate().toString().substring(0, 16),
                               style: StyleManager.semiBold.copyWith(
                                   color: color,
                                   fontSize: 12.0),
@@ -277,10 +277,6 @@ class SchoolCallCardBuilder extends StatelessWidget {
                           if (state is ChangeCallStatusError)
                           {
                             callMySnackBar(context: context, text: state.error);
-                          }
-                          if(state is ChangeCallStatusSuccess)
-                          {
-                            Navigator.pop(context);
                           }
                         },
                         builder: (context, state) {

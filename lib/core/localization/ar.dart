@@ -91,5 +91,10 @@ Map<String, String> ar =
   TranslationKeyManager.tooFar : 'المسافة بعيد عن المدرسة من فضلك اقترب اكثر',
   TranslationKeyManager.someThingWentWrong : 'حدث خطأ ما، حاول مرة اخرى',
   TranslationKeyManager.noSchoolFound : 'لم يتم العثور على المدرسة',
+  TranslationKeyManager.waitForResponse : 'انتظر الرد',
+  TranslationKeyManager.waitingForSchResForUKidReq : 'انتظر الرد من المدرسة لاستدعاء الطفل',
+  TranslationKeyManager.schoolAcceptedUKidReq : 'المدرسة قبلت استدعاء الطفل',
+  TranslationKeyManager.schoolRejectedUKidReq : 'المدرسة رفضت استدعاء الطفل',
+  TranslationKeyManager.schoolReply : 'رد المدرسة',
 
 };
