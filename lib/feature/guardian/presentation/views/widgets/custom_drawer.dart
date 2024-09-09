@@ -212,7 +212,7 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     showDialog(
                         context: context,
-                        builder: (BuildContext ctx) => alertLogout(context),
+                        builder: (BuildContext ctx) => alertLogout(context, isSchool: false),
                         barrierDismissible: false); // Close the drawer
                   },
                 ),

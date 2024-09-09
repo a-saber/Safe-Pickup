@@ -5,6 +5,7 @@ import 'level_model.dart';
 class SchoolModel
 {
   String? id;
+  String? fcmToken;
   String? name;
   String? location;
   String? email;
@@ -37,6 +38,7 @@ class SchoolModel
   SchoolModel.fromJson(Map<String, dynamic> json)
   {
     id = json['id'];
+    fcmToken = json['fcmToken'];
     phone = json['phone'];
     name = json['name'];
     location = json['location'];
@@ -79,6 +81,13 @@ class SchoolModel
       {
         'long' : long,
         'lat' : lat,
+      };
+  }
+  Map<String, dynamic> toJsonUpdateFCMToken()
+  {
+    return
+      {
+        'fcmToken' : fcmToken,
       };
   }
 }

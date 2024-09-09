@@ -3,6 +3,7 @@ import 'package:call_son/core/models/kid_model.dart';
 class ParentModel
 {
   String? id;
+  String? fcmToken;
   String? name;
   String? phone;
   String? email;
@@ -18,6 +19,7 @@ class ParentModel
 
   ParentModel({
     this.id,
+    this.fcmToken,
     this.name,
     this.phone,
     this.email,
@@ -32,6 +34,7 @@ class ParentModel
   ParentModel.fromJson(Map<String, dynamic> json)
   {
     id = json['id'];
+    fcmToken = json['fcmToken'];
     name = json['name'];
     phone = json['phone'];
     email = json['email'];
@@ -63,6 +66,14 @@ class ParentModel
         'name' : name,
         'phone' : phone,
         'ssn' : ssn,
+      };
+  }
+
+  Map<String, dynamic> toJsonUpdateFCMToken()
+  {
+    return
+      {
+        'fcmToken' : fcmToken,
       };
   }
 }

@@ -1,17 +1,20 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
 import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/logout_cubit/logout_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/logout_cubit/logout_state.dart';
 import 'package:call_son/feature/auth/presentation/views/login_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-AlertDialog alertLogout(context) => AlertDialog(
+AlertDialog alertLogout(context, {required bool isSchool}) => AlertDialog(
       insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
       shape: const RoundedRectangleBorder(
@@ -114,7 +117,14 @@ AlertDialog alertLogout(context) => AlertDialog(
                                           fontSize: 19,
                                         )),
                                   ),
-                                  onPressed: () {LogoutCubit.get(context).logout();}),
+                                  onPressed: () async{
+                                    print(isSchool);
+                                    await FirebaseFirestore.instance.collection(
+                                        isSchool?
+                                        CollectionManager.schoolsCollection:
+                                        CollectionManager.parentsCollection
+                                    ).doc(FirebaseAuth.instance.currentUser!.uid).update({'fcmToken': null});
+                                    LogoutCubit.get(context).logout();}),
                             );
                           }
                         },

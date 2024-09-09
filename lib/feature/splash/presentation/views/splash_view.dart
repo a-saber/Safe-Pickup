@@ -1,5 +1,6 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
 import 'package:call_son/core/resources_manager/assets_manager.dart';
+import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
@@ -8,7 +9,9 @@ import 'package:call_son/feature/auth/presentation/cubit/get_user_cubit/get_user
 import 'package:call_son/feature/guardian/presentation/views/parents_home_view.dart';
 import 'package:call_son/feature/auth/presentation/views/login_view.dart';
 import 'package:call_son/feature/school/presentation/views/school_home_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -60,15 +63,31 @@ class _SplashViewState extends State<SplashView> {
             navigateToNextScreen(nextScreen: const LoginView());
           }
           return BlocListener<GetUserCubit, GetUserState>(
-            listener: (context, state) {
+            listener: (context, state) async{
               if (state is GetUserSuccess) {
                 if(state.loginModel.isSchool)
                 {
+                  String? fcmToken = state.loginModel.json['fcmToken'];
+                  if(fcmToken == null)
+                  {
+                    fcmToken = await FirebaseMessaging.instance.getToken();
+                    FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+                        .doc(state.loginModel.json['id']).update({'fcmToken': fcmToken});
+                    state.loginModel.json['fcmToken'] = fcmToken;
+                  }
                   GetSchoolCubit.get(context).assignSchool(json: state.loginModel.json);
                   navigateToNextScreen(nextScreen: const SchoolHomeView());
                 }
                 else
                 {
+                  String? fcmToken = state.loginModel.json['fcmToken'];
+                  if(fcmToken == null)
+                  {
+                    fcmToken = await FirebaseMessaging.instance.getToken();
+                    FirebaseFirestore.instance.collection(CollectionManager.parentsCollection)
+                        .doc(state.loginModel.json['id']).update({'fcmToken': fcmToken});
+                    state.loginModel.json['fcmToken'] = fcmToken;
+                  }
                   GetParentCubit.get(context).assignParent(json: state.loginModel.json);
                   navigateToNextScreen(nextScreen: const ParentsHomeView());
                 }

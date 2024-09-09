@@ -61,6 +61,10 @@ dependencies:
   shared_preferences:
   flutter_local_notifications:
   flutterflow_paginate_firestore:
+  http:
+  googleapis:
+  googleapis_auth:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:

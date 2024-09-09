@@ -1,6 +1,7 @@
 import 'package:call_son/core/core_widgets/pop_up/my_snack_bar.dart';
 import 'package:call_son/core/localization/translation_key_manager.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/image_manager/get_image.dart';
 import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_school_cubit.dart';
@@ -8,6 +9,9 @@ import 'package:call_son/feature/auth/presentation/cubit/get_school_cubit/get_sc
 import 'package:call_son/feature/auth/presentation/views/login_view.dart';
 import 'package:call_son/feature/school/presentation/views/school_calls_view.dart';
 import 'package:call_son/feature/school/presentation/views/widgets/school_custom_drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -19,6 +23,11 @@ class SchoolHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+      FirebaseFirestore.instance.collection(CollectionManager.schoolsCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid).update({'fcmToken': newToken});
+    });
     return Scaffold(
       key:  scaffoldKey,
       drawer: SchoolCustomDrawer(scaffoldKey: scaffoldKey),

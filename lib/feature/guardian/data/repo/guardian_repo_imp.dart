@@ -6,6 +6,7 @@ import 'package:call_son/core/models/kid_model.dart';
 import 'package:call_son/core/models/level_model.dart';
 import 'package:call_son/core/models/school_kid_model.dart';
 import 'package:call_son/core/models/school_parent_verify_model.dart';
+import 'package:call_son/core/notification_manager/push_notification_service.dart';
 import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/shared_functions/location.dart';
 import 'package:call_son/core/models/call_model.dart';
@@ -569,6 +570,7 @@ static late ParentModel guardianModel;
           callModel.toJson()
         );
         await batch.commit();
+        await PushNotificationService.sendNotificationToSelectedDriver(deviceToken: schoolModel.fcmToken!);
         return right(callModel.id!);
       }
       else

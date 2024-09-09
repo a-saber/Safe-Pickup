@@ -1,12 +1,18 @@
 import 'package:call_son/core/core_widgets/default_form/default_form_field.dart';
 import 'package:call_son/core/localization/translation_key_manager.dart';
+import 'package:call_son/core/notification_manager/push_notification_service.dart';
 import 'package:call_son/core/resources_manager/color_manager.dart';
+import 'package:call_son/core/resources_manager/constants_manager.dart';
 import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
+import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_nearby_schools/get_nearby_schools_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_nearby_schools/get_nearby_schools_state.dart';
 import 'package:call_son/feature/guardian/presentation/views/widgets/custom_floating_action_button.dart';
 import 'package:call_son/feature/guardian/presentation/views/widgets/school_level_card_builder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -22,12 +28,16 @@ class ParentsHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+      FirebaseFirestore.instance.collection(CollectionManager.parentsCollection)
+          .doc(FirebaseAuth.instance.currentUser!.uid).update({'fcmToken': newToken});
+    });
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
         title:  Text(TranslationKeyManager.home.tr),
         leading: IconButton(
-          onPressed: () {
+          onPressed: () async{
             scaffoldKey.currentState!.openDrawer();
           },
           icon: const Icon(IconlyLight.category),),
