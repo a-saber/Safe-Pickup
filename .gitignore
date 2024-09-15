@@ -44,3 +44,4 @@ app.*.map.json
 
 # Firebase Secrets
 /lib/core/notification_manager/firebase_secrets.dart
+/lib/core/notification_manager/push_notification_service.dart
