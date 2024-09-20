@@ -530,7 +530,7 @@ class GuardianRepoImplementation extends GuardianRepo {
 
 static late ParentModel guardianModel;
   @override
-  Future<Either<Failure, String>> callUp({required String kidId, required SchoolModel schoolModel}) async
+  Future<Either<Failure, String>> callUp({required KidModel kid, required SchoolModel schoolModel, required ParentModel parent }) async
   {
     try {
       Position? current = await LocationManager.getCurrentLocation();
@@ -545,7 +545,7 @@ static late ParentModel guardianModel;
       {
         var parentId = FirebaseAuth.instance.currentUser!.uid;
         CallModel callModel = CallModel(
-          kidId: kidId,
+          kidId: kid.id,
           parentId: parentId,
           superParentId: parentId,
           schoolId: schoolModel.id,
@@ -570,7 +570,11 @@ static late ParentModel guardianModel;
           callModel.toJson()
         );
         await batch.commit();
-        await PushNotificationService.sendNotificationToSelectedDriver(deviceToken: schoolModel.fcmToken!);
+        await PushNotificationService.sendNotificationToUser(
+          deviceToken: schoolModel.fcmToken!,
+          title: TranslationKeyManager.pickup.tr,
+          body: '${kid.name} ${parent.name}\n${schoolModel.kidLevelModel!.name}'
+        );
         return right(callModel.id!);
       }
       else
@@ -593,7 +597,8 @@ static late ParentModel guardianModel;
     required double lat2,
   })
   {
-    return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 100;
+    // return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 100;
+    return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 1000000000000000000;
   }
 
 

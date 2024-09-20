@@ -65,6 +65,7 @@ dependencies:
   googleapis:
   googleapis_auth:
   firebase_messaging:
+  flutter_tts: ^4.0.2
 
 dev_dependencies:
   flutter_test:

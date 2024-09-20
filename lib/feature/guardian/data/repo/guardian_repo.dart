@@ -58,5 +58,5 @@ abstract class GuardianRepo {
 
 
   Future<Either<Failure, String>> callUp(
-      {required String kidId, required SchoolModel schoolModel});
+      {required KidModel kid, required SchoolModel schoolModel, required ParentModel parent });
 }

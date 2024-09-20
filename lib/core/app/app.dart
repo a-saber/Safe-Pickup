@@ -32,6 +32,7 @@ import 'package:call_son/feature/auth/presentation/cubit/logout_cubit/logout_cub
 import 'package:call_son/feature/school/presentation/cubit/school_layout_cubit/school_layout_cubit.dart';
 import 'package:call_son/feature/school/presentation/cubit/update_school_data_cubit/update_school_data_cubit.dart';
 import 'package:call_son/feature/splash/presentation/views/splash_view.dart';
+import 'package:call_son/test_tts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -97,6 +98,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeManager.theme,
         debugShowCheckedModeBanner: false,
         home: const SplashView(),
+        //home:  TestTTS(),
       )
     );
   }

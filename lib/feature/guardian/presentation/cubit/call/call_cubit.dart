@@ -1,4 +1,6 @@
 import 'package:call_son/core/models/call_model.dart';
+import 'package:call_son/core/models/kid_model.dart';
+import 'package:call_son/core/models/parent_model.dart';
 import 'package:call_son/core/models/school_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,13 +13,15 @@ class CallCubit extends Cubit<CallState> {
   static CallCubit get(context) => BlocProvider.of(context);
 
   void callUp({
-    required String kidId,
+    required KidModel kid,
     required SchoolModel schoolModel,
+    required ParentModel parent,
   }) async
   {
     emit(CallLoading());
     var response = await authRepo.callUp(
-        kidId: kidId,
+      kid: kid,
+      parent: parent,
       schoolModel: schoolModel
     );
     response.fold((failure)

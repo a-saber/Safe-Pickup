@@ -23,8 +23,10 @@ class PushNotificationService
     return credentials.accessToken.data;
   }
 
-  static sendNotificationToSelectedDriver({
+  static sendNotificationToUser({
     required String deviceToken,
+    required String title,
+    required String body,
   }) async
   {
     try
@@ -38,8 +40,8 @@ class PushNotificationService
           'token': deviceToken,
           'notification':
           {
-            'title': 'test 01',
-            'body': 'test body 01'
+            'title': title,
+            'body': body
           },
           'data':
           {

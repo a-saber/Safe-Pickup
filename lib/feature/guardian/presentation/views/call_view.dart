@@ -8,6 +8,7 @@ import 'package:call_son/core/resources_manager/delay_manager.dart';
 import 'package:call_son/core/resources_manager/style_manager.dart';
 import 'package:call_son/core/shared_functions/location.dart';
 import 'package:call_son/core/models/kid_model.dart';
+import 'package:call_son/feature/auth/presentation/cubit/get_parent_cubit/get_parent_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_kid_data_cubit/get_kid_data_cubit.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_kid_data_cubit/get_kid_data_state.dart';
 import 'package:call_son/feature/guardian/presentation/cubit/get_super_parent_kids_cubit/get_super_parent_kids_cubit.dart';
@@ -150,7 +151,8 @@ class _CallViewState extends State<CallView> {
                                 onTap: () async
                                 {
                                   CallCubit.get(context).callUp(
-                                      kidId: kid!.id!,
+                                      kid: kid!,
+                                      parent: GetParentCubit.get(context).parentModel!,
                                       schoolModel: school!
                                   );
                                 },
