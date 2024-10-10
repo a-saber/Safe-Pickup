@@ -597,8 +597,7 @@ static late ParentModel guardianModel;
     required double lat2,
   })
   {
-    // return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 100;
-    return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 1000000000000000000;
+    return LocationManager.getDistanceFromLatLonInM(lat1: lat1, lon1: lon1, lon2: lon2, lat2: lat2) < 100;
   }
 
 
