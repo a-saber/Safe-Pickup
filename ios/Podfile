@@ -6,13 +6,18 @@ target 'Runner' do
   use_frameworks!
 
   # Pods for Runner
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
+  # Add any additional Firebase services you are using
+
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-
 
   target 'RunnerTests' do
     inherit! :search_paths
     # Pods for testing
   end
-
 end
