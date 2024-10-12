@@ -6,6 +6,9 @@ target 'Runner' do
   use_frameworks!
 
   # Pods for Runner
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
 
   target 'RunnerTests' do
     inherit! :search_paths
